@@ -1,0 +1,19 @@
+{
+  "name": "csci3230-final-project",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "description": "CSCI3230-FinalProject",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.3.0",
+    "pug": "^3.0.2"
+  }
+}
