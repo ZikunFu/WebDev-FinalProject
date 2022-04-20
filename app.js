@@ -1,13 +1,50 @@
 'use strict';
 const express = require('express');
+const mongoose = require('mongoose');
+
+const Info = require('./models/test.js');
 //database methods
 //const database = require('./serverJS/database.js');
 //login methods
 //const bcrypt = require('bcryptjs');
+
 let app = express();
+
+const dbURI = 'mongodb+srv://user1:user11234@profile.p9muv.mongodb.net/profile-info?retryWrites=true&w=majority';
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
+    .then((result) => console.log('connect to db'))
+    .catch((err) => console.log(err));
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
+
+// add new info
+app.get('/add-info', (req,res)=>{
+    const info = new Info({
+        username: 'mikeJ',
+        password: 'MiK000111',
+        win: 6,
+        loss: 3
+    });
+
+    info.save()
+        .then((result)=>{
+            res.send(result)
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+});
+//get all the data info
+app.get('/all-infos',(req,res)=>{
+    Info.find()
+        .then((result)=>{
+            res.send(result);
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+})
 
 // view engine setup
 app.set('views', __dirname+'/views');
