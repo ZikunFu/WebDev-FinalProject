@@ -35,7 +35,9 @@
   <ItemGroup>
     <Content Include="app.js" />
     <Content Include="public\images\logo.gif" />
-    <Content Include="public\stylesheets\main.css" />
+    <Content Include="public\scripts\game.js" />
+    <Content Include="public\styles\game.css" />
+    <Content Include="public\styles\home.css" />
     <Content Include="README.md" />
     <Content Include="views\rank.pug" />
     <Content Include="views\guide.pug" />
@@ -49,8 +51,8 @@
   <ItemGroup>
     <Folder Include="public\" />
     <Folder Include="public\images\" />
-    <Folder Include="public\javascripts\" />
-    <Folder Include="public\stylesheets\" />
+    <Folder Include="public\scripts\" />
+    <Folder Include="public\styles\" />
     <Folder Include="views\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />

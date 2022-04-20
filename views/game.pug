@@ -2,5 +2,21 @@ extends navBar
 append styles
 	// Custom styles for this template
 	link(href='styles/home.css', rel='stylesheet')
+	link(href='styles/game.css', rel='stylesheet')
+append scripts
+	script(src="scripts/game.js")
 block content
-	h1 game page
+	div(id="top")
+		form(id="settings")
+			br
+			label(for="location") Difficulty: 
+			select(id="difficulty")
+				option(value="Easy") Easy
+				option(value="Medium") Medium
+				option(value="Hard") Hard
+			br
+			button START
+	br
+	div(id="game")
+		table(style="text-align:center;" id="board" class="board")
+		table(id="interface" class="interface")
