@@ -15,9 +15,49 @@ app.set('view engine', 'pug');
 
 app.get('/', function (request, response) {
     response.render("home"
-    //,{
-    //    title: "The title variable in app.js"
-    // }
+    ,{
+        title: "Chen Yang NB"
+     }
+    );
+});
+
+app.get('/game', function (request, response) {
+    response.render("game"
+        //, {
+        //    title: "The {title} variable in app.js"
+        //}
+    );
+});
+
+app.get('/login', function (request, response) {
+    response.render("login"
+        //, {
+        //    title: "The {title} variable in app.js"
+        //}
+    );
+});
+
+app.get('/profile', function (request, response) {
+    response.render("profile"
+        //, {
+        //    title: "The {title} variable in app.js"
+        //}
+    );
+});
+
+app.get('/guide', function (request, response) {
+    response.render("guide"
+        //, {
+        //    title: "The {title} variable in app.js"
+        //}
+    );
+});
+
+app.get('/rank', function (request, response) {
+    response.render("rank"
+        //, {
+        //    title: "The {title} variable in app.js"
+        //}
     );
 });
 

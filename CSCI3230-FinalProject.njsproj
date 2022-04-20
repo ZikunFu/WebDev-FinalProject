@@ -34,11 +34,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.js" />
+    <Content Include="public\images\logo.gif" />
     <Content Include="public\stylesheets\main.css" />
     <Content Include="README.md" />
+    <Content Include="views\rank.pug" />
+    <Content Include="views\guide.pug" />
+    <Content Include="views\game.pug" />
+    <Content Include="views\profile.pug" />
+    <Content Include="views\login.pug" />
     <Content Include="views\home.pug" />
     <Content Include="views\index.pug" />
-    <Content Include="views\_bootstrap.pug" />
+    <Content Include="views\navBar.pug" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\" />
