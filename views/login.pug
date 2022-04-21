@@ -1,6 +1,21 @@
 extends navBar
-append styles
-	// Custom styles for this template
-	link(href='styles/home.css', rel='stylesheet')
+
 block content
-	h1 LOGIN PAGE
+    h1= title
+
+    div(class="error")= errorMessage
+	
+    form(method="post", action="/login", class="form")
+        label(class="label", for="username") Username: 
+        input(type="text",
+            id="username",
+            name="username",
+            placeholder="username",
+            class="control row1")
+        label(class="label", for="password") Password: 
+        input(type="password",
+            id="password",
+            name="password",
+            placeholder="password",
+            class="control row2")
+        button(class="control row3") Log In
