@@ -7,6 +7,7 @@ const Info = require('./models/test.js');
 //const database = require('./serverJS/database.js');
 //login methods
 const bcrypt = require('bcryptjs');
+const { response } = require('express');
 
 let app = express();
 
@@ -70,6 +71,7 @@ function userExists(userToFind) {
     }); 
 };
 
+
 app.get('/', function (request, response) {
     response.render("home"
     ,{
@@ -86,12 +88,52 @@ app.get('/game', function (request, response) {
     );
 });
 
+app.get('/register', function (req, response) {
+    response.render("register",{
+        title: "register page"
+    });
+});
+
+app.post('/register', function(request, res){
+    let username = request.body.username;
+    let password = request.body.password;
+    let newUserData = {
+        username: username,
+        password: password,
+        win: 0,
+        loss: 0,
+    };
+    userExists(username).then(result => {
+        res.render('register',{
+            title: 'Register',
+            errorMessage: 'username already in used'
+        });
+    }).catch(error => {
+        let newUser = new Info.Info(newUserData);
+        newUser.save(function(error){
+            if(error){
+                res.render('register',{
+                    title: 'Register',
+                    errorMessage: 'Unable to save user'
+                });
+            }
+            else{
+                res.render('register',{
+                    title: 'register successfully',
+                    username: username
+                })
+            }
+        })
+    })
+});
+
 app.get('/login', function(req, res){
     
     res.render('login',{
         title: "Login page"
     });
 });
+
 
 app.post('/login', function(request, res){
     //Check the login info form database.
@@ -123,9 +165,7 @@ app.post('/login', function(request, res){
             title: "Login page",
             errorMessage: "Login failed please try again!!"
         });
-    });
-    
-    
+    }); 
 });
 
 app.get('/profile', function (request, response) {
