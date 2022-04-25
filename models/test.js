@@ -23,6 +23,6 @@ const profileSchema = new Schema({
 },{ timestamps: true });
 
 //create the model
-const Info = mongoose.model('Info', profileSchema);
-module.exports = Info;
+module.exports.Info = mongoose.model('Info', profileSchema);
+
 

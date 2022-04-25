@@ -6,7 +6,7 @@ const Info = require('./models/test.js');
 //database methods
 //const database = require('./serverJS/database.js');
 //login methods
-//const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 let app = express();
 
@@ -52,16 +52,17 @@ app.get('/all-infos',(req,res)=>{
 app.set('views', __dirname+'/views');
 app.set('view engine', 'pug');
 
-function userExists(userToFind){
+function userExists(userToFind) {
+    console.log("finding user");
+    
     return new Promise ((resolve, reject) =>{
-        test.Info.find({username: userToFind}).then(
-            function(results){
-                console.log("good")
+        Info.Info.find({username: userToFind}).then(
+            function (results) {
                 if(results.length >0){
-                    console.log(results);
+                    console.log("username found in database");
                     resolve (results[0].password);
                 }else{
-                    console.log(111)
+                    console.log("username not found")
                     reject ("");
                 }
             }
@@ -99,12 +100,17 @@ app.post('/login', function(request, res){
     let password = request.body.password;
     userExists(username).then(result => {
         //Success
-        console.log(`savedpassword: ${result}`);
-        if (bcrypt.compareSync(result, password)){
-            res.render('loginConfirmed',{
-                title: "Login successful",
-                username: username
+        console.log("input password:" + password);
+        console.log("database password:"+result);
+        if (result==password) {
+            res.render('login', {
+                title: "Login page",
+                errorMessage: "Login successful!!"
             });
+            //res.render('loginConfirmed',{
+            //    title: "Login successful",
+            //    username: username
+            //});
         }else{
             res.render('login',{
                 title: "Login page",
