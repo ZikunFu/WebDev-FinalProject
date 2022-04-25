@@ -10,6 +10,7 @@ const bcrypt = require('bcryptjs');
 const { response } = require('express');
 
 let app = express();
+let win = true;
 
 const dbURI = 'mongodb+srv://user1:user11234@profile.p9muv.mongodb.net/profile-info?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
@@ -71,6 +72,19 @@ function userExists(userToFind) {
     }); 
 };
 
+function update(usertoFind){
+    console.log("finding user");
+    Info.Info.find({username: usertoFind}).then(
+        function(results){
+            if(win = true){
+                results.win += 1;
+            if(win = false){
+                results.loss += 1;
+            } 
+            }
+        }
+    )
+}
 
 app.get('/', function (request, response) {
     response.render("home"
