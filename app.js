@@ -20,6 +20,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
+var userdata = {};
+var authorized = false;
+
 // add new info
 
 //app.get('/add-info', (req,res)=>{
@@ -55,13 +58,12 @@ app.set('views', __dirname+'/views');
 app.set('view engine', 'pug');
 
 function userExists(userToFind) {
-    console.log("finding user");
-    
     return new Promise ((resolve, reject) =>{
         Info.Info.find({username: userToFind}).then(
             function (results) {
-                if(results.length >0){
-                    console.log("username found in database");
+                if (results.length > 0) {
+                    userdata["username"] = results[0].username
+                    console.log(results[0].username+" found in database");
                     resolve (results[0].password);
                 }else{
                     console.log("username not found")
@@ -87,19 +89,39 @@ function update(usertoFind){
 }
 
 app.get('/', function (request, response) {
+    
     response.render("home"
     ,{
-        title: "Chen Yang NB"
+        title: "Chen Yang NB",
+        auth: authorized
      }
     );
 });
 
 app.get('/game', function (request, response) {
-    response.render("game"
-        //, {
-        //    title: "The {title} variable in app.js"
-        //}
-    );
+    if (Object.keys(userdata).length > 0) {
+        response.render("game"
+            , {
+                data: JSON.stringify(userdata),
+                auth: authorized
+            }
+        );
+    }
+    else {
+        response.render("error"
+            , {
+                message: "Please login before playing"
+            }
+        );
+    }
+});
+
+app.post('/game/win', (req, res) => {
+    // you have address available in req.body:
+
+    console.log("Game win Request received: " + req.body.username);
+    // always send a response:
+    res.json({ ok: true });
 });
 
 app.get('/register', function (req, response) {
@@ -142,9 +164,9 @@ app.post('/register', function(request, res){
 });
 
 app.get('/login', function(req, res){
-    
     res.render('login',{
-        title: "Login page"
+        title: "Login page",
+        auth: authorized
     });
 });
 
@@ -152,21 +174,20 @@ app.get('/login', function(req, res){
 app.post('/login', function(request, res){
     //Check the login info form database.
     console.log(request.body);
-    let username = request.body.username;
-    let password = request.body.password;
-    userExists(username).then(result => {
+    let inputUsername = request.body.username;
+    let inputPassword = request.body.password;
+    userExists(inputUsername).then(result => {
         //Success
-        console.log("input password:" + password);
+        console.log("input password:" + inputPassword);
         console.log("database password:"+result);
-        if (result==password) {
+        if (result == inputPassword) {
+            //set auth status
+            authorized = true;
+            //render success page
             res.render('login', {
                 title: "Login page",
                 errorMessage: "Login successful!!"
             });
-            //res.render('loginConfirmed',{
-            //    title: "Login successful",
-            //    username: username
-            //});
         }else{
             res.render('login',{
                 title: "Login page",
@@ -183,11 +204,21 @@ app.post('/login', function(request, res){
 });
 
 app.get('/profile', function (request, response) {
-    response.render("profile"
-        //, {
-        //    title: "The {title} variable in app.js"
-        //}
-    );
+    if (Object.keys(userdata).length > 0) {
+        response.render("profile"
+            , {
+                data: JSON.stringify(userdata),
+                auth: authorized
+            }
+        );
+    }
+    else {
+        response.render("error"
+            , {
+                message: "Please login before viewing profile"
+            }
+        );
+    }
 });
 
 app.get('/guide', function (request, response) {

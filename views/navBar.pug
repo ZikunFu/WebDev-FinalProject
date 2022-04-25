@@ -35,14 +35,14 @@ html(lang="en")
 							a(href='/rank') Rank
 					ul.nav.navbar-nav.navbar-right
 						li.active
-							a(href='/login')
-								| Login
-								span.sr-only (current)
-						li.active
-							a(href='/register')
-								| register
-								span.sr-only (current)
+							if(!auth)
+								a(href='/login')
+									| Login
+									span.sr-only (current)	
 		block content
 		block scripts
 			script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
 			script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
+			script.
+				var user
+				user = !{data}
