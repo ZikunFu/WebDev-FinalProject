@@ -20,6 +20,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 var userdata = {};
+var isWin;
 var authorized = false;
 
 // add new info
@@ -79,6 +80,7 @@ app.get('/', function (request, response) {
     response.render("home"
     ,{
         title: "Chen Yang NB",
+        data: JSON.stringify(userdata),
         auth: authorized
      }
     );
@@ -104,8 +106,9 @@ app.get('/game', function (request, response) {
 
 app.post('/game/win', (req, res) => {
     // you have address available in req.body:
-
-    console.log("Game win Request received: " + req.body.username);
+    isWin = req.body.isUserWin;
+    console.log("Game win Request received: " + req.body.username + " with " + req.body.userWin);
+    
     // always send a response:
     res.json({ ok: true });
 });
