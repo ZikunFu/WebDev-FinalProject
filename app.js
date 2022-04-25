@@ -86,6 +86,13 @@ function update(usertoFind,isWin){
         }
     )
 }
+function updateUserData(usertoFind) {
+    Info.Info.find({ username: usertoFind }).then(
+        function (results) {
+            userdata = results;
+        }
+    )
+}
 
 app.get('/', function (request, response) {
     
@@ -194,11 +201,12 @@ app.post('/login', function(request, res){
     let inputPassword = request.body.password;
     userExists(inputUsername).then(result => {
         //Success
-        console.log("input password:" + inputPassword);
-        console.log("database password:"+result);
+        //console.log("input password: " + inputPassword);
+        //console.log("database password: "+result);
         if (result == inputPassword) {
             //set auth status
             authorized = true;
+            updateUserData(inputUsername);
             //render success page
             res.render('login', {
                 title: "Login page",
@@ -221,10 +229,11 @@ app.post('/login', function(request, res){
 
 app.get('/profile', function (request, response) {
     if (Object.keys(userdata).length > 0) {
+        console.log(userdata)
         response.render("profile"
             , {
-                data: JSON.stringify(userdata),
-                auth: authorized
+                data: userdata[0],
+                auth: authorized,
             }
         );
     }

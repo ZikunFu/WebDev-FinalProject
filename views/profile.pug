@@ -2,5 +2,18 @@ extends navBar
 append styles
 	// Custom styles for this template
 	link(href='styles/home.css', rel='stylesheet')
+
 block content
-		h1 profile page
+	h1 Welcosme #{data.username} to your profile 
+	h2 your account is created on #{data.createdAt}
+	h2 ID: #{data.id}
+	h2 Current password: #{data.password}
+	h2 You have won #{data.win} games
+	h2 You have lost #{data.loss} games
+	h2 your last game is #{data.updatedAt}
+	form
+		label(for="currPW") Current Password
+		input(type="text" name="currPW" id="currPW")
+		label(for="newPW") New Password
+		input(type="text" name="newPW" id="newPW")
+		input(type="submit")
