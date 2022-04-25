@@ -26,30 +26,47 @@ table.board td:hover {
     background-color: #f5dd90;
 }
 
-/*Interface starts here*/
-table.interface {
-    border-collapse: collapse;
-    font-size: 30px;
-    margin: 0px auto;
-    text-align:center;
-}
 
-    table.interface td:hover {
-        background-color: #f5dd90;
-    }
 
 /*additional CSS classes*/
-#top{
+#settings {
     text-align: center;
+    font-family: 'Century Schoolbook';
+}
 
+label {
+    font-size:18px;
 }
 #game {
-    top: 100px;
-    bottom: 0;
-    left: 0;
-    right: 0;
     background-position: center;
     background-image: url(/images/board.jpg);
     background-size: 544px auto;
     background-repeat: no-repeat;
+}
+
+select {
+    background-color: peru;
+    color: cornsilk;
+    padding: 10px;
+    width: 120px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+}
+    
+
+button {
+    background-color: peru;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    margin: 4px 2px;
+    cursor: pointer;
 }

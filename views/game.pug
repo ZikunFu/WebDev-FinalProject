@@ -6,26 +6,29 @@ append styles
 append scripts
 	script(src="scripts/game.js")
 block content
-	div(id="top")
+	div(class="container")
+		div(id="option" class="option")
 		form(id="settings")
 			br
-			label(for="difficulty") Difficulty: 
+			label(for="difficulty") Difficulty:&nbsp&nbsp
 			select(id="difficulty")
 				option(value="Easy") Easy
 				option(value="Medium") Medium
 			br
-			label(for="playerColor") User color: 
+			br
+			label(for="playerColor") User color:&nbsp
 			select(id="playerColor")
 				option(value="white") White
 				option(value="black" selected) Black
 			br
-			label(for="npcColor") NPC color: 
+			br
+			label(for="npcColor") NPC color:&nbsp
 			select(id="npcColor")
 				option(value="white") White
 				option(value="black") Black
 			br
-		button Apply
-	br
-	div(id="game")
-		table(style="text-align:center;" id="board" class="board")
-		table(id="interface" class="interface")
+			br
+			button Apply
+		div(id="game" class="game")
+			table(style="text-align:center;" id="board" class="board")
+			table(id="interface" class="interface")

@@ -39,7 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 
 //get all the data info
 app.get('/all-infos',(req,res)=>{
-    Info.find()
+    Info.Info.find()
         .then((result)=>{
             res.send(result);
         })
