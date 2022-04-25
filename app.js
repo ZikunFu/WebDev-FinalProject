@@ -74,19 +74,7 @@ function userExists(userToFind) {
     }); 
 };
 
-function update(usertoFind){
-    console.log("finding user");
-    Info.Info.find({username: usertoFind}).then(
-        function(results){
-            if(win = true){
-                results.win += 1;
-            if(win = false){
-                results.loss += 1;
-            } 
-            }
-        }
-    )
-}
+
 
 app.get('/', function (request, response) {
     
