@@ -73,7 +73,7 @@ function userExists(userToFind) {
     }); 
 };
 // make win and loss work and record in the database
-function update(usertoFind, isWin){
+function updateGame(usertoFind, isWin){
     console.log("finding user");
     Info.Info.find({username: usertoFind}).then(
         function(results){
@@ -100,7 +100,44 @@ function update(usertoFind, isWin){
             }
         })
 }
-function updateUserData(usertoFind) {
+
+function updatePassword(usertoFind, currPassword, newPassword, response) {
+
+    Info.Info.find({ username: usertoFind }).then(
+        function (results) {
+            //check agains current password
+            console.log(results[0])
+            let databasePW = results[0].password
+            if (databasePW == currPassword) {
+                var query = { username: usertoFind };
+                var newValues = { $set: { password: newPassword } };
+                //update password
+                Info.Info.updateOne(query, newValues, function (err, res) {
+                    if (err) throw err;
+                })
+                response.render("profile"
+                    , {
+                        data: userdata[0],
+                        auth: authorized,
+                        message:"Successfult updated password"
+                    }
+                );
+            }
+            else {
+                response.render("profile"
+                    , {
+                        data: userdata[0],
+                        auth: authorized,
+                        message: "Error: Current password is not matched with our database"
+                    }
+                );
+                console.log("current password not matched")
+            }
+
+        })
+}
+
+function getUserData(usertoFind) {
     Info.Info.find({ username: usertoFind }).then(
         function (results) {
             userdata = results;
@@ -125,7 +162,7 @@ app.get('/game', function (request, response) {
     if (Object.keys(userdata).length > 0) {
         response.render("game"
             , {
-                data: JSON.stringify(userdata),
+                data: JSON.stringify(userdata[0]),
                 auth: authorized
             }
         );
@@ -142,7 +179,7 @@ app.get('/game', function (request, response) {
 app.post('/game/win', (req, res) => {
     // you have address available in req.body:
     console.log("Game win Request received: " + req.body.username + " with " + req.body.userWin);
-    update(req.body.username, req.body.userWin);
+    updateGame(req.body.username, req.body.userWin);
     // always send a response:
     res.json({ ok: true });
 });
@@ -220,7 +257,7 @@ app.post('/login', function(request, res){
         if (result == inputPassword) {
             //set auth status
             authorized = true;
-            updateUserData(inputUsername);
+            getUserData(inputUsername);
             //render success page
             res.render('login', {
                 title: "Login page",
@@ -243,7 +280,6 @@ app.post('/login', function(request, res){
 
 app.get('/profile', function (request, response) {
     if (Object.keys(userdata).length > 0) {
-        console.log(userdata)
         response.render("profile"
             , {
                 data: userdata[0],
@@ -258,6 +294,15 @@ app.get('/profile', function (request, response) {
             }
         );
     }
+});
+
+//profile password update
+app.post('/profile', function (request, res) {
+    let currPassword = request.body.currPassword;
+    let newPassword = request.body.newPassword;
+    console.log("update password curr=" + currPassword + " new=" + newPassword);
+    updatePassword(userdata[0].username, currPassword, newPassword,res);
+    
 });
 
 app.get('/guide', function (request, response) {

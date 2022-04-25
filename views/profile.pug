@@ -4,16 +4,18 @@ append styles
 	link(href='styles/home.css', rel='stylesheet')
 
 block content
-	h1 Welcosme #{data.username} to your profile 
+	h1(style="text-align:center;") Welcome #{data.username} to Your Profile 
 	h2 your account is created on #{data.createdAt}
 	h2 ID: #{data.id}
 	h2 Current password: #{data.password}
 	h2 You have won #{data.win} games
 	h2 You have lost #{data.loss} games
-	h2 your last game is #{data.updatedAt}
-	form
+	h2 Your last game is #{data.updatedAt}
+	
+	form(action="/profile" method="post")
+		h2 #{message}
 		label(for="currPW") Current Password
-		input(type="text" name="currPW" id="currPW")
+		input(type="text" name="currPassword" id="currPassword")
 		label(for="newPW") New Password
-		input(type="text" name="newPW" id="newPW")
-		input(type="submit")
+		input(type="text" name="newPassword" id="newPassword")
+		button submit
