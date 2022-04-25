@@ -72,7 +72,7 @@ function userExists(userToFind) {
         );
     }); 
 };
-
+// make win and loss work and record in the database
 function update(usertoFind, isWin){
     console.log("finding user");
     Info.Info.find({username: usertoFind}).then(
