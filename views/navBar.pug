@@ -34,10 +34,20 @@ html(lang="en")
 						li
 							a(href='/rank') Rank
 					ul.nav.navbar-nav.navbar-right
-						li.active
-							if(!auth)
+						if(!auth)
+							li.active
 								a(href='/login')
 									| Login
+									span.sr-only (current)	
+							
+							li.active
+								a(href='/register')
+									| Register
+									span.sr-only (current)
+						else
+							li.active
+								a(href='/logout')
+									| Logout
 									span.sr-only (current)	
 		block content
 		block scripts

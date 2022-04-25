@@ -53,6 +53,7 @@
     <Content Include="views\home.pug" />
     <Content Include="views\index.pug" />
     <Content Include="views\navBar.pug" />
+    <Content Include="views\register.pug" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />

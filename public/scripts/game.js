@@ -4,7 +4,6 @@ var playerColor = "black"
 var npcColor = "white"
 //user is defined in pug
 const username = user.username;
-
 $(document).ready(function () {
     let board = $('#board');
     vBoard = generateTable(board);
@@ -27,12 +26,12 @@ $('#settings').submit(function (event) {
 //display winning message
 function resolveComplete(playerWin) {
     if (playerWin = true) {
-        addWin(1)
+        addWin(true)
         alert("Player Win! Your win count has been updated! Click confirm to start new game")
         location.reload();
     }
     else {
-        addWin(0)
+        addWin(false)
         alert("NPC Win! Your loss count has been updated. Click confirm to start new game")
         location.reload();
     }
@@ -42,7 +41,9 @@ function resolveComplete(playerWin) {
 function addWin(isUserWin) {
     var dataToSend = {}
     dataToSend["username"] = username;
+
     dataToSend["userWin"] = isUserWin;
+ 
     console.log(dataToSend)
     $.post('/game/win', dataToSend);
 }
@@ -73,12 +74,14 @@ function boardOnClick() {
         //Replace vBoard
         vBoard[selected_row][selected_col] = playerColor;
         if (checkWin(userMoveID)==true) {
-            alert(vBoard[selected_row][selected_col]+" win")
+            //alert(vBoard[selected_row][selected_col] + " win")
+            resolveComplete(true)
         }
 
         let npcMoveID = npcMove(board, vBoard)
         if (checkWin(npcMoveID) == true) {
-            alert(vBoard[npcMoveID[0]][npcMoveID[1]] + " win")
+            //alert(vBoard[npcMoveID[0]][npcMoveID[1]] + " win")
+            resolveComplete(false)
         }
     }
 
@@ -206,8 +209,8 @@ function generateTable(board) {
 
 //check if selected color is won
 function checkWin(targetID) {
-    row = parseInt(targetID[0])
-    col = parseInt(targetID[1])
+    let row = parseInt(targetID[0])
+    let col = parseInt(targetID[1])
     var color = vBoard[row][col]
 
     if (checkTop(color, row, col) + checkBottom(color, row, col) >= 6) {
@@ -232,7 +235,7 @@ function checkWin(targetID) {
 } 
 
 function checkTop(color, row, col) {
-    count = 0
+    let count = 0
     //console.log("Targeted ID is: "+row+col)
     for (let i = row; i >= 0; i--) {
         //console.log("checking "+i+col)
@@ -247,7 +250,7 @@ function checkTop(color, row, col) {
     return count;
 }
 function checkBottom(color, row, col) {
-    count = 0
+    let count = 0
     for (let i = row; i < vBoard.length; i++) {
         if (vBoard[i][col] == color) {
             count += 1;
@@ -260,7 +263,7 @@ function checkBottom(color, row, col) {
 }
 
 function checkLeft(color, row, col) {
-    count = 0
+    let count = 0
     //console.log("Targeted ID is: " + row + col)
     for (let i = col; i >= 0; i--) {
         //console.log("checking " + i + col)
@@ -275,7 +278,7 @@ function checkLeft(color, row, col) {
     return count;
 }
 function checkRight(color, row, col) {
-    count = 0
+    let count = 0
     for (let i = col; i < vBoard.length; i++) {
         if (vBoard[row][i] == color) {
             count += 1;
@@ -289,7 +292,7 @@ function checkRight(color, row, col) {
 
 //diagonal checker
 function checkTopRight(color, row, col) {
-    count = 0;
+    let count = 0;
     //console.log("Targeted ID is: " + row + col)
     while (row >= 0 && col <= vBoard.length) {
         
@@ -305,7 +308,7 @@ function checkTopRight(color, row, col) {
     return count;
 }
 function checkBottomLeft(color, row, col) {
-    count = 0;
+    let count = 0;
     //console.log("Targeted ID is: " + row + col)
     while (row < vBoard.length && col > 0) {
         //console.log("checking " + row + col)
@@ -321,7 +324,7 @@ function checkBottomLeft(color, row, col) {
 }
 
 function checkTopLeft(color, row, col) {
-    count = 0;
+    let count = 0;
     //console.log("Targeted ID is: " + row + col)
     while (row >= 0 && col <= vBoard.length) {
         //getCell(''+row+col).css("background-color","red")
@@ -337,7 +340,7 @@ function checkTopLeft(color, row, col) {
     return count;
 }
 function checkBottomRight(color, row, col) {
-    count = 0;
+    let count = 0;
     //console.log("Targeted ID is: " + row + col)
     while (row < vBoard.length && col < vBoard.length) {
         //getCell('' + row + col).css("background-color", "red")
