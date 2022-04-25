@@ -52,6 +52,23 @@ app.get('/all-infos',(req,res)=>{
 app.set('views', __dirname+'/views');
 app.set('view engine', 'pug');
 
+function userExists(userToFind){
+    return new Promise ((resolve, reject) =>{
+        test.Info.find({username: userToFind}).then(
+            function(results){
+                console.log("good")
+                if(results.length >0){
+                    console.log(results);
+                    resolve (results[0].password);
+                }else{
+                    console.log(111)
+                    reject ("");
+                }
+            }
+        );
+    }); 
+};
+
 app.get('/', function (request, response) {
     response.render("home"
     ,{
@@ -68,12 +85,41 @@ app.get('/game', function (request, response) {
     );
 });
 
-app.get('/login', function (request, response) {
-    response.render("login"
-        //, {
-        //    title: "The {title} variable in app.js"
-        //}
-    );
+app.get('/login', function(req, res){
+    
+    res.render('login',{
+        title: "Login page"
+    });
+});
+
+app.post('/login', function(request, res){
+    //Check the login info form database.
+    console.log(request.body);
+    let username = request.body.username;
+    let password = request.body.password;
+    userExists(username).then(result => {
+        //Success
+        console.log(`savedpassword: ${result}`);
+        if (bcrypt.compareSync(result, password)){
+            res.render('loginConfirmed',{
+                title: "Login successful",
+                username: username
+            });
+        }else{
+            res.render('login',{
+                title: "Login page",
+                errorMessage: "Login failed please try agian!!"
+            });
+        }
+       
+    }).catch(error => {
+        res.render('login',{
+            title: "Login page",
+            errorMessage: "Login failed please try again!!"
+        });
+    });
+    
+    
 });
 
 app.get('/profile', function (request, response) {
