@@ -1,13 +1,12 @@
 ﻿var vBoard
 var difficulty = "Easy"
-
 var playerColor = "black"
-var npcColor    = "white"
-
+var npcColor = "white"
+//user is defined in pug
+const username = user.username;
 
 $(document).ready(function () {
     let board = $('#board');
-    
     vBoard = generateTable(board);
 })
 
@@ -17,11 +16,36 @@ $('#settings').submit(function (event) {
     difficulty = $('#difficulty').val();
     playerColor = $('#playerColor').val();
     npcColor = $('#npcColor').val();
-    console.log("difficulty is set to" + difficulty)
+    console.log("playercolor is set to " + playerColor);
+    console.log("npcColor is set to " + npcColor);
+    console.log("difficulty is set to" + difficulty);
     
 });
 
 //essential functions
+
+//display winning message
+function resolveComplete(playerWin) {
+    if (playerWin = true) {
+        addWin(1)
+        alert("Player Win! Your win count has been updated! Click confirm to start new game")
+        location.reload();
+    }
+    else {
+        addWin(0)
+        alert("NPC Win! Your loss count has been updated. Click confirm to start new game")
+        location.reload();
+    }
+}
+
+//transfer win data back to server
+function addWin(isUserWin) {
+    var dataToSend = {}
+    dataToSend["username"] = username;
+    dataToSend["userWin"] = isUserWin;
+    console.log(dataToSend)
+    $.post('/game/win', dataToSend);
+}
 
 //monitor user input on board
 var userMoveID

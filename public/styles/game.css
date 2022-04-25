@@ -1,3 +1,39 @@
+#settings {
+    width: 50%;
+    text-align: center;
+    font-family: 'Century Schoolbook';
+}
+
+#game {
+    width: 50%;
+    background-position: center;
+    background-image: url(/images/board.jpg);
+    background-size: 544px auto;
+    background-repeat: no-repeat;
+}
+/*reactive layout for mobile*/
+@media (max-width: 800px){
+    #container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        align-content: center;
+    }
+    #game{
+        width: auto;
+    }
+    #settings {
+        width: 100%;
+    }
+
+}
+#container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
 /*Board starts here*/
 table.board {
     border-collapse: collapse;
@@ -29,20 +65,11 @@ table.board td:hover {
 
 
 /*additional CSS classes*/
-#settings {
-    text-align: center;
-    font-family: 'Century Schoolbook';
-}
 
 label {
     font-size:18px;
 }
-#game {
-    background-position: center;
-    background-image: url(/images/board.jpg);
-    background-size: 544px auto;
-    background-repeat: no-repeat;
-}
+
 
 select {
     background-color: peru;

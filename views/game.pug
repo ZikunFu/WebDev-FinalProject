@@ -4,11 +4,20 @@ append styles
 	link(href='styles/home.css', rel='stylesheet')
 	link(href='styles/game.css', rel='stylesheet')
 append scripts
-	script(src="scripts/game.js")
+	script(type="module" src="scripts/game.js")
+	script.
+		var user
+		user = !{data}
+		
 block content
-	div(class="container")
+	div(class="container" id="container")
+		div(id="game" class="game")
+			table(style="text-align:center;" id="board" class="board")
+			table(id="interface" class="interface")
 		div(id="option" class="option")
+		
 		form(id="settings")
+			h1 Options
 			br
 			label(for="difficulty") Difficulty:&nbsp&nbsp
 			select(id="difficulty")
@@ -29,6 +38,4 @@ block content
 			br
 			br
 			button Apply
-		div(id="game" class="game")
-			table(style="text-align:center;" id="board" class="board")
-			table(id="interface" class="interface")
+		

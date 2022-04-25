@@ -44,6 +44,7 @@
     <Content Include="public\styles\game.css" />
     <Content Include="public\styles\home.css" />
     <Content Include="README.md" />
+    <Content Include="views\error.pug" />
     <Content Include="views\rank.pug" />
     <Content Include="views\guide.pug" />
     <Content Include="views\game.pug" />
