@@ -72,19 +72,33 @@ function userExists(userToFind) {
         );
     }); 
 };
-
-function update(usertoFind,isWin){
+// make win and loss work and record in the database
+function update(usertoFind, isWin){
     console.log("finding user");
     Info.Info.find({username: usertoFind}).then(
         function(results){
-            if (isWin) {
-                results.win += 1;
+            if(isWin){
+                let count = results[0].win;
+                count = count + 1;
+                console.log(results[0].win)
+                var query = {username: usertoFind};
+                var newValues = { $set: {win: count}};
+                Info.Info.updateOne(query, newValues, function(err, res){
+                    if (err) throw err;
+                    console.log('win + 1')
+                })}
+                else{
+                    let count = results[0].loss;
+                    count = count + 1;
+                    console.log(results[0].loss)
+                    var query = {username: usertoFind};
+                    var newValues = {$set: {loss: count}};
+                    Info.Info.updateOne(query, newValues, function(err, res){
+                        if(err) throw err;
+                        console.log('win - 1')
+                    })
             }
-            else {
-                results.loss += 1;
-            }
-        }
-    )
+        })
 }
 function updateUserData(usertoFind) {
     Info.Info.find({ username: usertoFind }).then(
