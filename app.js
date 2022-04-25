@@ -10,7 +10,6 @@ const bcrypt = require('bcryptjs');
 const { response } = require('express');
 
 let app = express();
-let win = true;
 
 const dbURI = 'mongodb+srv://user1:user11234@profile.p9muv.mongodb.net/profile-info?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
@@ -21,7 +20,6 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 var userdata = {};
-var isWin;
 var authorized = false;
 
 // add new info
@@ -75,15 +73,15 @@ function userExists(userToFind) {
     }); 
 };
 
-function update(usertoFind){
+function update(usertoFind,isWin){
     console.log("finding user");
     Info.Info.find({username: usertoFind}).then(
         function(results){
-            if(win = true){
+            if (isWin) {
                 results.win += 1;
-            if(win = false){
+            }
+            else {
                 results.loss += 1;
-            } 
             }
         }
     )
@@ -99,6 +97,8 @@ app.get('/', function (request, response) {
      }
     );
 });
+
+
 
 app.get('/game', function (request, response) {
     if (Object.keys(userdata).length > 0) {
@@ -120,9 +120,8 @@ app.get('/game', function (request, response) {
 
 app.post('/game/win', (req, res) => {
     // you have address available in req.body:
-    isWin = req.body.isUserWin;
     console.log("Game win Request received: " + req.body.username + " with " + req.body.userWin);
-    
+    update(req.body.username, req.body.userWin);
     // always send a response:
     res.json({ ok: true });
 });
@@ -166,11 +165,25 @@ app.post('/register', function(request, res){
     })
 });
 
+//login direct
 app.get('/login', function(req, res){
     res.render('login',{
         title: "Login page",
         auth: authorized
     });
+});
+
+//logout direct
+app.get('/logout', function (request, response) {
+    userdata = {};
+    authorized = false;
+    response.render("home"
+        , {
+            title: "Chen Yang NB",
+            data: JSON.stringify(userdata),
+            auth: authorized
+        }
+    );
 });
 
 
