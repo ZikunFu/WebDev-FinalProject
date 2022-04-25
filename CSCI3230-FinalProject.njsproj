@@ -34,7 +34,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.js" />
+    <Content Include="models\test.js" />
+    <Content Include="public\images\black.png" />
+    <Content Include="public\images\board.jpg" />
     <Content Include="public\images\logo.gif" />
+    <Content Include="public\images\undo.png" />
+    <Content Include="public\images\white.png" />
     <Content Include="public\scripts\game.js" />
     <Content Include="public\styles\game.css" />
     <Content Include="public\styles\home.css" />
@@ -49,6 +54,7 @@
     <Content Include="views\navBar.pug" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="models\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\scripts\" />

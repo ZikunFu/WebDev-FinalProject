@@ -9,13 +9,22 @@ block content
 	div(id="top")
 		form(id="settings")
 			br
-			label(for="location") Difficulty: 
+			label(for="difficulty") Difficulty: 
 			select(id="difficulty")
 				option(value="Easy") Easy
 				option(value="Medium") Medium
-				option(value="Hard") Hard
 			br
-			button START
+			label(for="playerColor") User color: 
+			select(id="playerColor")
+				option(value="white") White
+				option(value="black" selected) Black
+			br
+			label(for="npcColor") NPC color: 
+			select(id="npcColor")
+				option(value="white") White
+				option(value="black") Black
+			br
+		button Apply
 	br
 	div(id="game")
 		table(style="text-align:center;" id="board" class="board")

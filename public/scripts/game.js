@@ -1,15 +1,22 @@
 ﻿var vBoard
 var difficulty = "Easy"
 
+var playerColor = "black"
+var npcColor    = "white"
+
+
 $(document).ready(function () {
     let board = $('#board');
+    
     vBoard = generateTable(board);
 })
 
 //pre game settings
 $('#settings').submit(function (event) {
-    event.preventDefault();
+    event.preventDefault()
     difficulty = $('#difficulty').val();
+    playerColor = $('#playerColor').val();
+    npcColor = $('#npcColor').val();
     console.log("difficulty is set to" + difficulty)
     
 });
@@ -31,18 +38,24 @@ function boardOnClick() {
     }
     else {
         userMoveID = '' + selected_row + selected_col
-        $(this).append(img_blackPiece());
+        
 
-        //Replace Vboard
-        vBoard[selected_row][selected_col] = 'black';
+        if (playerColor == "black") {
+            $(this).append(img_blackPiece());
+        }
+        else {
+            $(this).append(img_whitePiece());
+        }
+        //Replace vBoard
+        vBoard[selected_row][selected_col] = playerColor;
         if (checkWin(userMoveID)==true) {
-            alert("user win")
+            alert(vBoard[selected_row][selected_col]+" win")
         }
 
         let npcMoveID = npcMove(board, vBoard)
-        //if (checkWin(npcMoveID) == true) {
-        //    alert("NPC win")
-        //}
+        if (checkWin(npcMoveID) == true) {
+            alert(vBoard[npcMoveID[0]][npcMoveID[1]] + " win")
+        }
     }
 
 }
@@ -66,8 +79,14 @@ function npc_easy_move() {
 
         if (vBoard[row][col] == ' ') {
             //console.log("inserting into " + id)
-            getCell(id).append(img_whitePiece())
-            vBoard[row][col] = 'white'
+            if (npcColor == "black") {
+                getCell(id).append(img_blackPiece())
+            }
+            else {
+                getCell(id).append(img_whitePiece())
+            }
+            
+            vBoard[row][col] = npcColor;
             return id
         }
         else {
@@ -99,7 +118,7 @@ function npc_medium_move() {
 
     //npc make move
     getCell(id).append(img_whitePiece())
-    vBoard[npc_move_row][npc_move_col] = 'white'
+    vBoard[npc_move_row][npc_move_col] = npcColor
     return id
 }
 

@@ -12,29 +12,31 @@ let app = express();
 
 const dbURI = 'mongodb+srv://user1:user11234@profile.p9muv.mongodb.net/profile-info?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
-    .then((result) => console.log('connect to db'))
+    .then((result) => console.log('Connected to Database!'))
     .catch((err) => console.log(err));
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 // add new info
-app.get('/add-info', (req,res)=>{
-    const info = new Info({
-        username: 'mikeJ',
-        password: 'MiK000111',
-        win: 6,
-        loss: 3
-    });
 
-    info.save()
-        .then((result)=>{
-            res.send(result)
-        })
-        .catch((err)=>{
-            console.log(err);
-        });
-});
+//app.get('/add-info', (req,res)=>{
+//    const info = new Info({
+//        username: 'mikeJ',
+//        password: 'MiK000111',
+//        win: 6,
+//        loss: 3
+//    });
+
+//    info.save()
+//        .then((result)=>{
+//            res.send(result)
+//        })
+//        .catch((err)=>{
+//            console.log(err);
+//        });
+//});
+
 //get all the data info
 app.get('/all-infos',(req,res)=>{
     Info.find()
