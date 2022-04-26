@@ -9,13 +9,37 @@ $(document).ready(function () {
 //Button for beginner
 $('#op1').click(function (event) {
     event.preventDefault();
+    let query = "Chinese Go chess beginner guide";
+    $('#keyword').val(query)
+    search(query);
+});
+
+//Button for intermediate
+$('#op2').click(function (event) {
+    event.preventDefault();
+    let query = "Chinese Go chess intermediate guide";
+    $('#keyword').val(query)
+    search(query);
+});
+
+//button for expert
+$('#op3').click(function (event) {
+    event.preventDefault();
+    let query = "Chinese Go chess expert guide";
+    $('#keyword').val(query)
+    search(query);
+});
+
+$('#options').submit(function (event) {
+    let keyword = $('#keyword');
+    event.preventDefault();
     search(keyword);
 });
 
 function search(keyword) {
     const videoDiv = $('#videos');
     //clear previous
-    videoDiv.clear();
+    videoDiv.empty();
 
     var searchSettings = {
         "part": 'snippet',
