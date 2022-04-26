@@ -38,11 +38,22 @@
     <Content Include="public\images\black.png" />
     <Content Include="public\images\board.jpg" />
     <Content Include="public\images\logo.gif" />
+    <Content Include="public\images\rank\bronze.webp" />
+    <Content Include="public\images\rank\diamond.webp" />
+    <Content Include="public\images\rank\gold.webp" />
+    <Content Include="public\images\rank\master.webp" />
+    <Content Include="public\images\rank\sliver.webp" />
     <Content Include="public\images\undo.png" />
     <Content Include="public\images\white.png" />
     <Content Include="public\scripts\game.js" />
     <Content Include="public\styles\game.css" />
     <Content Include="public\styles\home.css" />
+    <Content Include="public\styles\error.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\styles\profile.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="README.md" />
     <Content Include="views\error.pug" />
     <Content Include="views\rank.pug" />
@@ -59,6 +70,7 @@
     <Folder Include="models\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
+    <Folder Include="public\images\rank\" />
     <Folder Include="public\scripts\" />
     <Folder Include="public\styles\" />
     <Folder Include="views\" />

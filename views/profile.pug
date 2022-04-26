@@ -2,20 +2,70 @@ extends navBar
 append styles
 	// Custom styles for this template
 	link(href='styles/home.css', rel='stylesheet')
+	link(href='styles/profile.css', rel='stylesheet')
 
 block content
-	h1(style="text-align:center;") Welcome #{data.username} to Your Profile 
-	h2 your account is created on #{data.createdAt}
-	h2 ID: #{data.id}
-	h2 Current password: #{data.password}
-	h2 You have won #{data.win} games
-	h2 You have lost #{data.loss} games
-	h2 Your last game is #{data.updatedAt}
-	
-	form(action="/profile" method="post")
-		h2 #{message}
-		label(for="currPW") Current Password
-		input(type="text" name="currPassword" id="currPassword")
-		label(for="newPW") New Password
-		input(type="text" name="newPassword" id="newPassword")
-		button submit
+	section#about(class="section about-section gray-bg")
+		div(class="container")
+			div(class="row align-items-center flex-row-reverse")
+				div(class="col-lg-6")
+					div(class="about-text go-to")
+						h3(class="dark-color") Your Profile Page
+						h6(class="theme-color lead") Welcome #{data.username}!
+						p Your last game is on #{data.updatedAt}
+						div(class="row about-list")
+							div(class="col-md-6")
+								div(class="media")
+									label ID
+									p #{data.id}
+							div(class="col-md-6")
+								div(class="media")
+									label Your Rank
+									p #{cRank}
+							div(class="col-md-6")
+								div(class="media")
+									label Password
+									p #{data.password}
+							div(class="col-md-6")
+								div(class="media")
+									label Next Rank
+									p #{nRank}
+							
+						form(action="/profile" method="post" id="pwForm")
+							p #{message}
+							label(for="currPW") Current Password:
+							input(type="text" name="currPassword" id="currPassword")
+							br
+							label(for="newPW") New Password:
+							input(type="text" name="newPassword" id="newPassword")
+							button(id="pw") Change
+				div(class="col-lg-6")
+					div(class="about-avatar")
+						if(cRank=="bronze")
+							img(src="images/rank/bronze.webp", title="", alt="",id="rank")
+						if(cRank=="silver")
+							img(src="images/rank/silver.webp", title="", alt="",id="rank")
+						if(cRank=="gold")
+							img(src="images/rank/gold.webp", title="", alt="",id="rank")
+						if(cRank=="diamond")
+							img(src="images/rank/diamond.webp", title="", alt="",id="rank")
+						if(cRank=="master")
+							img(src="images/rank/master.webp", title="", alt="",id="rank")
+			div(class="counter")
+				div(class="row")
+					div(class="col-6 col-lg-3")
+						div(class="count-data text-center")
+							h6(class="count h2", data-to="500", data-speed="500") #{data.win}
+							p(class="m-0px font-w-600") Wins
+					div(class="col-6 col-lg-3")
+						div(class="count-data text-center")
+							h6(class="count h2", data-to="150", data-speed="150") #{data.loss}
+							p(class="m-0px font-w-600") Loss
+					div(class="col-6 col-lg-3")
+						div(class="count-data text-center")
+							h6(class="count h2", data-to="850", data-speed="850") #{g}
+							p(class="m-0px font-w-600") Games to Rank Up
+					div(class="col-6 col-lg-3")
+						div(class="count-data text-center")
+							h6(class="count h2", data-to="190", data-speed="190") #{t}
+							p(class="m-0px font-w-600") Total Games Played

@@ -1,6 +1,15 @@
-extends navBar
+//extends navBar
 append styles
 	// Custom styles for this template
 	link(href='styles/home.css', rel='stylesheet')
+	link(href='styles/error.css', rel='stylesheet')
 block content
-	h1 Error: #{message}
+	//h1 Error: #{message}
+	div(id="message")
+		h1 Error!
+		p #{message}
+	div(id="buttons")
+		a(href="javascript:history.back()") Back
+		a(href="/") Home
+		br
+		span Your next move

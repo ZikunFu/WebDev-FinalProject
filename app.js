@@ -101,6 +101,44 @@ function updateGame(usertoFind, isWin){
         })
 }
 
+function calculateRank() {
+    var wins = userdata[0].win;
+    var loss = userdata[0].loss;
+    var rank = [];
+
+    if (wins >= 5) {
+        //curr rank
+        rank.push("silver")
+        //next rank
+        rank.push("gold")
+        //games to rank up
+        rank.push(10-wins)
+    }
+    else if (wins >= 10) {
+        rank.push("gold")
+        rank.push("diamond")
+        rank.push(15 - wins)
+    }
+    else if (wins >= 15) {
+        rank.push("diamond")
+        rank.push("master")
+        rank.push(20 - wins)
+    }
+    else if (wins >= 20) {
+        rank.push("master")
+        rank.push("Highest Rank!")
+        rank.push(0)
+    }
+    else {
+        rank.push("bronze")
+        rank.push("silver")
+        rank.push(5 - wins)
+    }
+    //total games played
+    rank.push(wins+loss)
+    return rank
+}
+
 function updatePassword(usertoFind, currPassword, newPassword, response) {
 
     Info.Info.find({ username: usertoFind }).then(
@@ -280,10 +318,19 @@ app.post('/login', function(request, res){
 
 app.get('/profile', function (request, response) {
     if (Object.keys(userdata).length > 0) {
+        var rank = calculateRank();
+        var currRank = rank[0];
+        var nextRank = rank[1];
+        var games = rank[2];
+        var total = rank[3];
         response.render("profile"
             , {
                 data: userdata[0],
                 auth: authorized,
+                cRank: currRank,
+                nRank: nextRank,
+                g: games,
+                t: total
             }
         );
     }
