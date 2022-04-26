@@ -2,5 +2,15 @@ extends navBar
 append styles
 	// Custom styles for this template
 	link(href='styles/home.css', rel='stylesheet')
+	link(href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', rel='stylesheet')
+	link(href='styles/guide.css', rel='stylesheet')
+append scripts
+	script(src="https://apis.google.com/js/api.js")
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js")
+	script(src="scripts/guide.js")
 block content
-	h1 Guide PAGE
+	form(id="options")
+		label(for="keyword") Video title
+		input(type="text" id="keyword" required)
+		input(type="submit" value="Submit")
+	div(id="videos")

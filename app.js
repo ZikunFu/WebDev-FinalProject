@@ -354,9 +354,9 @@ app.post('/profile', function (request, res) {
 
 app.get('/guide', function (request, response) {
     response.render("guide"
-        //, {
-        //    title: "The {title} variable in app.js"
-        //}
+        , {
+            data:null
+        }
     );
 });
 
