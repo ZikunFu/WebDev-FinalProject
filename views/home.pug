@@ -3,13 +3,14 @@ append styles
 	// Custom styles for this template
 	link(href='styles/home.css', rel='stylesheet')
 block content
-	h1 welcome! #{title}
-	div.bt
-		a(href="/game")
-			button(type="button") PLAY
-	div.bt
-		a(href="/game")
-			button(type="button") GUIDE
+	div.home
+		h1 welcome! #{title}
 		div.bt
-		a(href="/game")
-			button(type="button") RANK
+			a(href="/game")
+				button(type="button") PLAY
+		div.bt
+			a(href="/game")
+				button(type="button") GUIDE
+			div.bt
+			a(href="/game")
+				button(type="button") RANK

@@ -187,7 +187,7 @@ app.get('/', function (request, response) {
     
     response.render("home"
     ,{
-        title: "Chen Yang NB",
+        title: "Player!",
         data: JSON.stringify(userdata),
         auth: authorized
      }
