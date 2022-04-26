@@ -9,6 +9,7 @@ html(lang="en")
 		title= title
 		block styles
 			link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
+			link(href='styles/navBar.css', rel='stylesheet')
 	body(data-spy="scroll",data-target=".scrollspy")
 		block body
 			.container
@@ -22,31 +23,31 @@ html(lang="en")
 						span.icon-bar
 						span.icon-bar
 					a.navbar-brand(href='#')
-						img(src='images/logo.gif' width="30" height="24")
+						img(src='images/wuziqi.png' width="30" height="24" id="logo")
 				#navbar.navbar-collapse.collapse
 					ul.nav.navbar-nav
 						li
-							a(href='/') Home
+							a(href='/' id="bar1") Home
 						li
-							a(href='/profile') Profile
+							a(href='/profile' id="bar2") Profile
 						li
-							a(href='/guide') Guide
+							a(href='/guide' id="bar3") Guide
 						li
-							a(href='/rank') Rank
+							a(href='/rank' id="bar4") Rank
 					ul.nav.navbar-nav.navbar-right
 						if(!auth)
 							li.active
-								a(href='/login')
+								a(href='/login' id="right1")
 									| Login
 									span.sr-only (current)	
 							
 							li.active
-								a(href='/register')
+								a(href='/register' id="right2")
 									| Register
 									span.sr-only (current)
 						else
 							li.active
-								a(href='/logout')
+								a(href='/logout' id="right3")
 									| Logout
 									span.sr-only (current)	
 		block content
