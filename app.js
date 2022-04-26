@@ -106,30 +106,32 @@ function calculateRank() {
     var loss = userdata[0].loss;
     var rank = [];
 
-    if (wins >= 5) {
+    if (wins >= 20) {
+        //this is the highest rank
+        rank.push("master")
+        rank.push("Highest Rank!")
+        rank.push(0)
+    }
+    else if (wins >= 15) {
         //curr rank
-        rank.push("silver")
+        rank.push("diamond")
         //next rank
-        rank.push("gold")
+        rank.push("master")
         //games to rank up
-        rank.push(10-wins)
+        rank.push(20 - wins)
     }
     else if (wins >= 10) {
         rank.push("gold")
         rank.push("diamond")
         rank.push(15 - wins)
     }
-    else if (wins >= 15) {
-        rank.push("diamond")
-        rank.push("master")
-        rank.push(20 - wins)
-    }
-    else if (wins >= 20) {
-        rank.push("master")
-        rank.push("Highest Rank!")
-        rank.push(0)
+    else if (wins >= 5) {
+        rank.push("silver")
+        rank.push("gold")
+        rank.push(10 - wins)
     }
     else {
+        //lowest rank
         rank.push("bronze")
         rank.push("silver")
         rank.push(5 - wins)
@@ -354,9 +356,9 @@ app.post('/profile', function (request, res) {
 
 app.get('/guide', function (request, response) {
     response.render("guide"
-        //, {
-        //    title: "The {title} variable in app.js"
-        //}
+        , {
+            data:null
+        }
     );
 });
 

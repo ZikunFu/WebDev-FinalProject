@@ -2,6 +2,23 @@ extends navBar
 append styles
 	// Custom styles for this template
 	link(href='styles/home.css', rel='stylesheet')
+<<<<<<< HEAD
 	link(href='styles/guide.cs', rel='stylesheet')
+=======
+	link(href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', rel='stylesheet')
+	link(href='styles/guide.css', rel='stylesheet')
+append scripts
+	script(src="https://apis.google.com/js/api.js")
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js")
+	script(src="scripts/guide.js")
+>>>>>>> 9d087a7a75d9fc0e1322d9b7eba1ea3457741beb
 block content
-	h1 Guide PAGE
+	div(class="relative")
+		p Select Your Level
+		button(class="navitem" id="op1") Beginner
+		button(class="navitem" id="op2") Intermediate
+		button(class="navitem" id="op3") Expert
+	form(id="options")
+		input(type="text" id="keyword" placeholder="Video Title" required)
+		input(type="submit" value="Search")
+	div(id="videos" class="container")
