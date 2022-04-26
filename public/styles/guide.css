@@ -1,7 +1,92 @@
-.paginate {
-    margin-right: 5px;
+/*Buttons starts here*/
+.relative {
+    /* padding: 10px; */
+    position: relative;
+    background-color: #fff;
+    margin: 9px;
+text-align: center;}
+#options{
+    text-align:center;
+}
+input[type=text] {
+    width: 20%;
+    height: 16%;
+    padding: 12px 20px;
+    margin: 7px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
 }
 
-li {
+    input[type=text]:focus {
+        border: 3px solid #555;
+    }
+
+input[type=submit] {
+    width: 20%;
+    height: 16%;
+    padding: 12px 20px;
+    margin: 7px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+margin-left: 5px;}
+
+.navitem {
     display: inline-block;
+    width: 160px;
+    height: 40px;
+    text-align: center;
+    border: gray;
+    background-color: #E8562A;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+font-size: 20px;margin-right: 12px;}
+
+/*video division starts here*/
+#videos {
+    display: flex;
+    width: 100%;
+    padding: 4% 2%;
+    box-sizing: border-box;
+    height: 60vh;
 }
+
+.box {
+    flex: 1;
+    overflow: hidden;
+    transition: 0.5s;
+    margin: 0 2%;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+    line-height: 0;
+}
+
+#thumbnail {
+    width: 150%;
+    height: calc(100% - 15vh);
+    object-fit: cover;
+    transition: 0.5s;
+    position: center;
+}
+
+    .box > span {
+        font-size: 20px;
+        display: block;
+        text-align: center;
+        height: 10vh;
+        line-height: 2.6;
+    }
+
+    .box:hover {
+        flex: 1 1 50%;
+    }
+
+        .box:hover #thumbnail {
+            width: 100%;
+            height: 90%;
+        }

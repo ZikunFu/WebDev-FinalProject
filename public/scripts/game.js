@@ -27,12 +27,12 @@ $('#settings').submit(function (event) {
 function resolveComplete(playerWin) {
     if (playerWin = true) {
         addWin(true)
-        alert("Player Win! Your win count has been updated! Click confirm to start new game")
+        alert("Player Win! Your win count has been updated.\n Click confirm to start new game")
         location.reload();
     }
     else {
         addWin(false)
-        alert("NPC Win! Your loss count has been updated. Click confirm to start new game")
+        alert("NPC Win! Your loss count has been updated.\n Click confirm to start new game")
         location.reload();
     }
 }
@@ -124,8 +124,8 @@ function npc_easy_move() {
 }
 
 function npc_medium_move() {
-    user_move_row = parseInt(userMoveID[0])
-    user_move_col = parseInt(userMoveID[1])
+    let user_move_row = parseInt(userMoveID[0])
+    let user_move_col = parseInt(userMoveID[1])
 
     let npc_move_row = getRandomInt(user_move_row - 1, user_move_row + 1)
     let npc_move_col = getRandomInt(user_move_col - 1, user_move_col + 1)
@@ -133,19 +133,25 @@ function npc_medium_move() {
 
 
     while (!validMove(npc_move_row, npc_move_col)) {
-        npc_move_row = getRandomInt(user_move_row - 1, user_move_row + 1)
-        npc_move_col = getRandomInt(user_move_col - 1, user_move_col + 1)
-        count += 1
+        npc_move_row = getRandomInt(user_move_row - 1, user_move_row + 1);
+        npc_move_col = getRandomInt(user_move_col - 1, user_move_col + 1);
+        count += 1;
         //if all possible move are occupied, choose random position
         if (count >= 10) {
-            return npc_easy_move()
+            return npc_easy_move();
         }
     }
-    id = '' + npc_move_row + npc_move_col;
+    let id = '' + npc_move_row + npc_move_col;
 
     //npc make move
-    getCell(id).append(img_whitePiece())
-    vBoard[npc_move_row][npc_move_col] = npcColor
+    if (npcColor == "black") {
+        getCell(id).append(img_blackPiece());
+    }
+    else {
+        getCell(id).append(img_whitePiece());
+    }
+    
+    vBoard[npc_move_row][npc_move_col] = npcColor;
     return id
 }
 
@@ -157,9 +163,6 @@ function npcMove() {
     else if (difficulty == "Medium") {
         moveID = npc_medium_move()
     }
-    //else if (difficulty == "Hard") {
-
-    //}
     else {
         console.log("error: difficulty value is not recognized (" + difficulty+")")
     }

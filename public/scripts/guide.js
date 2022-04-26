@@ -1,20 +1,22 @@
 ﻿const max = 3;
-const videoDiv = $('#videos');
+
 const form = $('#options');
 
 $(document).ready(function () {
     gapi.load("client", loadClient);
 })
 
-//Search for video
-$('#options').submit(function (event) {
+//Button for beginner
+$('#op1').click(function (event) {
     event.preventDefault();
-    search();
+    search(keyword);
 });
 
-function search() {
-    const keyword = $('#keyword').val();
-    console.log("query: "+keyword)
+function search(keyword) {
+    const videoDiv = $('#videos');
+    //clear previous
+    videoDiv.clear();
+
     var searchSettings = {
         "part": 'snippet',
         "type": 'video',
@@ -32,7 +34,7 @@ function search() {
                 console.log("Error: result empty")
             }
             else {
-                let ul = $('<ul>');
+                let li = $('<li>');
 
                 result.forEach(video => {
                     //Video attr
@@ -40,27 +42,29 @@ function search() {
                     var title = video.snippet.title;
                     console.log("Found video id=" + ID)
                     console.log("Found video title=" + title)
-                    //set fancybox 
-                    let a = $('<a>');
-                    a.attr('data-fancybox', '')
+
+                    //Set Division
+                    let imageBox = $('<div>');
+                    imageBox.attr('class', 'box')
+
+                    //Set link
+                    let a=$('<a>')
                     a.attr('href', "https://www.youtube.com/watch?v=" + ID );
-                    
+                    a.attr('data-fancybox','')
                     //Video thumbnail 
                     let thumbnail = $('<img>');
                     thumbnail.attr('src', "http://i3.ytimg.com/vi/" + ID + "/hqdefault.jpg")
-                        //thumbnail.attr('width', '250')
-                        //thumbnail.attr('height', '350')
+                    thumbnail.attr('id','thumbnail')
                     a.append(thumbnail)
 
                     //Video title
-                    let p = $('<p>');
-                    p.append(document.createTextNode(title));
+                    let label = $('<span>');
+                    label.append(document.createTextNode(title));
 
-                    //Append videos to list
-                    ul.append(a)
-                    ul.append(p)
                     //Append list to Div
-                    videoDiv.append(ul)
+                    imageBox.append(a)
+                    imageBox.append(label)
+                    videoDiv.append(imageBox)
                 })
             }
         }//catch error

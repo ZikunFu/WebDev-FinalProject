@@ -9,8 +9,12 @@ append scripts
 	script(src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js")
 	script(src="scripts/guide.js")
 block content
+	div(class="relative")
+		p Select Your Level
+		button(class="navitem" id="op1") Beginner
+		button(class="navitem" id="op2") Intermediate
+		button(class="navitem" id="op3") Expert
 	form(id="options")
-		label(for="keyword") Video title
-		input(type="text" id="keyword" required)
+		input(type="text" id="keyword" placeholder="Video Title" required)
 		input(type="submit" value="Submit")
-	div(id="videos")
+	div(id="videos" class="container")

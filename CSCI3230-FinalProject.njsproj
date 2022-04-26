@@ -42,7 +42,7 @@
     <Content Include="public\images\rank\diamond.webp" />
     <Content Include="public\images\rank\gold.webp" />
     <Content Include="public\images\rank\master.webp" />
-    <Content Include="public\images\rank\sliver.webp" />
+    <Content Include="public\images\rank\silver.webp" />
     <Content Include="public\images\undo.png" />
     <Content Include="public\images\white.png" />
     <Content Include="public\scripts\guide.js" />
