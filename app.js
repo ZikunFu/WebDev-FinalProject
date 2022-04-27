@@ -24,22 +24,22 @@ var authorized = false;
 
 // add new info
 
-//app.get('/add-info', (req,res)=>{
-//    const info = new Info({
-//        username: 'mikeJ',
-//        password: 'MiK000111',
-//        win: 6,
-//        loss: 3
-//    });
+/* app.get('/add-info', (req,res)=>{
+    const info = new Info.Info({
+        username: 'Chris',
+        password: '125874',
+        win: 16,
+        loss: 1
+    });
 
-//    info.save()
-//        .then((result)=>{
-//            res.send(result)
-//        })
-//        .catch((err)=>{
-//            console.log(err);
-//        });
-//});
+    info.save()
+        .then((result)=>{
+            res.send(result)
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+}); */
 
 //get all the data info
 app.get('/all-infos',(req,res)=>{
