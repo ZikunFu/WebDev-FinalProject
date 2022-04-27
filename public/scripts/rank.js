@@ -2,8 +2,7 @@
 	user = user.slice(0,3)
 	let temp = user[0]
 	user[0] = user[1]
-	user[1] = user[2]
-	user[2] = temp
+	user[1] = temp
 
     const margin = {top: 30, right: 30, bottom: 70, left: 60};
 	const width = 500 - margin.left - margin.right;
@@ -25,7 +24,7 @@
 	  .attr("transform", `translate(0, ${height} )`)
 	  .call(d3.axisBottom(x))
       
-		
+	  d3.selectAll("path,line").remove();
 			
 		 const y = d3.scaleLinear()
 		   .domain([0, 15])
@@ -61,7 +60,7 @@
 $(document).ready(function(){
 	let rank = $('#rank');
         let tbody = $('<tbody>');
-        for(y=user.length-1; y>=0; y--){
+        for(y=0; y<user.length; y++){
             let tr = $('<tr>');
                 let td1 = $('<td>');
                 td1.text(user[y].name);
