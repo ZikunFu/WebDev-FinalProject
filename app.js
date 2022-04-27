@@ -356,8 +356,7 @@ app.post('/profile', function (request, res) {
 app.get('/guide', function (request, response) {
     response.render("guide"
         , {
-            data: userdata[0],
-            auth: authorized
+            data: userdata[0]
         }
     );
 });
@@ -385,7 +384,7 @@ async function test() {
     });
     console.log(`loop all ${N} members success`);
 
-    temp.sort((a,b)=>{return a.point-b.point});
+    temp.sort((a,b)=>{return b.point-a.point});
 
     users = temp;
 
@@ -400,8 +399,7 @@ app.get('/rank', function (request, response) {
     //console.log(users);
     response.render("rank"
         , {
-            data: JSON.stringify(users),
-            auth: authorized
+            data:JSON.stringify(users)
         }
     );
 });
