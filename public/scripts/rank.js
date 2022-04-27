@@ -1,11 +1,9 @@
 ﻿window.onload = function() {
-    //let Dummy_Data = user;
-
     const margin = {top: 30, right: 30, bottom: 70, left: 60};
 	const width = 500 - margin.left - margin.right;
 	const height = 500 - margin.top - margin.bottom;
 			
-	const svg = d3.select("#asdf")
+	const svg = d3.select("#chart")
 	  .append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
@@ -47,7 +45,23 @@
              svg.append('text')
              .attr('x',0)
              .attr('y',0)
-             .text('win-loss')
-            
-             
+             .text('win-loss')       
 };
+
+//rank table
+$(document).ready(function(){
+	let rank = $('#rank');
+        let tbody = $('<tbody>');
+        for(y=user.length-1; y>=0; y--){
+            let tr = $('<tr>');
+                let td1 = $('<td>');
+                td1.text(user[y].name);
+                tr.append(td1)
+                let td2 = $('<td>');
+                td2.text(user[y].point);
+                tr.append(td2)
+                tbody.append(tr) 
+            tbody.append(tr)
+        }
+        rank.append(tbody)
+})
