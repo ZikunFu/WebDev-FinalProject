@@ -45,6 +45,7 @@
     <Content Include="public\images\rank\silver.webp" />
     <Content Include="public\images\undo.png" />
     <Content Include="public\images\white.png" />
+    <Content Include="public\scripts\rank.js" />
     <Content Include="public\scripts\guide.js" />
     <Content Include="public\scripts\game.js" />
     <Content Include="public\styles\game.css" />

@@ -2,5 +2,12 @@ extends navBar
 append styles
 	// Custom styles for this template
 	link(href='styles/home.css', rel='stylesheet')
+	
+append scripts
+	script(src="scripts/rank.js")
+	script.
+		var user
+		user = !{data}
+
 block content
-	h1 Rank Page
+	div(id="asdf")
