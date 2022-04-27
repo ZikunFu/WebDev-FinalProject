@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.js" />
+    <Content Include="Independent Study Presentation.pdf" />
     <Content Include="Independent Study Presentation.pptx" />
     <Content Include="models\test.js" />
     <Content Include="public\images\black.png" />
