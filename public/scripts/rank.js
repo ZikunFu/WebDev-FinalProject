@@ -1,4 +1,10 @@
 ﻿window.onload = function() {
+	user = user.slice(0,3)
+	let temp = user[0]
+	user[0] = user[1]
+	user[1] = user[2]
+	user[2] = temp
+
     const margin = {top: 30, right: 30, bottom: 70, left: 60};
 	const width = 500 - margin.left - margin.right;
 	const height = 500 - margin.top - margin.bottom;
@@ -24,8 +30,8 @@
 		 const y = d3.scaleLinear()
 		   .domain([0, 15])
 		   .range([ height, 0]);
-		 svg.append("g")
-		   .call(d3.axisLeft(y));
+		 //svg.append("g")
+		   //.call(d3.axisLeft(y));
 			
 		 svg.selectAll("mybar")
 		   .data(user)
@@ -37,15 +43,18 @@
 		 	.attr("height", d => height - y(d.point))
 		 	.attr("fill", "#ffff00")
     
+			 /*
              svg.append('text')
              .attr('x',width)
              .attr('y',height)
              .text('user')
 
+			 
              svg.append('text')
              .attr('x',0)
              .attr('y',0)
-             .text('win-loss')       
+             .text('win-loss')   
+			 */    
 };
 
 //rank table
