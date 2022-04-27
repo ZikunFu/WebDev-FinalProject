@@ -59,7 +59,7 @@ function updateGame(usertoFind, isWin){
                 else{
                     let count = results[0].loss;
                     count = count + 1;
-                    console.log(results[0].loss)
+                    //console.log(results[0].loss)
                     var query = {username: usertoFind};
                     var newValues = {$set: {loss: count}};
                     Info.Info.updateOne(query, newValues, function(err, res){
@@ -117,7 +117,7 @@ function updatePassword(usertoFind, currPassword, newPassword, response) {
     Info.Info.find({ username: usertoFind }).then(
         function (results) {
             //check agains current password
-            console.log(results[0])
+            //console.log(results[0])
             let databasePW = results[0].password
             if (databasePW == currPassword) {
                 var query = { username: usertoFind };
@@ -204,7 +204,7 @@ app.get('/game', function (request, response) {
 //Post game result handle
 app.post('/game/win', (req, res) => {
     // you have address available in req.body:
-    console.log("Game win Request received: " + req.body.username + " with " + req.body.userWin);
+    //console.log("Game win Request received: " + req.body.username + " with " + req.body.userWin);
     updateGame(req.body.username, req.body.userWin);
     // always send a response:
     res.json({ ok: true });
@@ -243,7 +243,8 @@ app.post('/register', function(request, res){
             }
             else{
                 res.render('register',{
-                    title: 'register successfully',
+                    title: 'Register',
+                    errorMessage: 'register successfully',
                     username: username
                 })
             }
@@ -262,7 +263,7 @@ app.get('/login', function(req, res){
 //login handle
 app.post('/login', function (request, res) {
     //Check the login info form database.
-    console.log(request.body);
+    //console.log(request.body);
     let inputUsername = request.body.username;
     let inputPassword = request.body.password;
     userExists(inputUsername).then(result => {
@@ -274,10 +275,7 @@ app.post('/login', function (request, res) {
             authorized = true;
             getUserData(inputUsername);
             //render success page
-            res.render('login', {
-                title: "Login page",
-                errorMessage: "Login successful!!"
-            });
+            res.redirect('/');
         } else {
             res.render('login', {
                 title: "Login page",
