@@ -372,7 +372,9 @@ app.get('/rank', function (request, response) {
                 userData.name = user.username
                 userData.point = user.win
                 userArr.push(userData)
+
             }
+            userArr.sort((a, b) => { return a.point - b.point });
             response.render("rank"
                 , {
                     data: JSON.stringify(userArr),
@@ -389,18 +391,6 @@ app.get('/rank', function (request, response) {
             );
         });
     
-});
-
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    response.render("error"
-        , {
-            message: "404 Page Not Found"
-        }
-    );
 });
 
 
