@@ -1,4 +1,5 @@
-﻿var vBoard
+﻿//Variable setup
+var vBoard
 var difficulty = "Easy"
 var playerColor = "black"
 var npcColor = "white"
@@ -15,9 +16,9 @@ $('#settings').submit(function (event) {
     difficulty = $('#difficulty').val();
     playerColor = $('#playerColor').val();
     npcColor = $('#npcColor').val();
-    console.log("playercolor is set to " + playerColor);
-    console.log("npcColor is set to " + npcColor);
-    console.log("difficulty is set to" + difficulty);
+    //console.log("playercolor is set to " + playerColor);
+    //console.log("npcColor is set to " + npcColor);
+    //console.log("difficulty is set to" + difficulty);
     alert("Settings Applied.\nYour color: " + playerColor + "\nNPC color: " + npcColor+"\nAI: " + difficulty)
 });
 
@@ -27,12 +28,12 @@ $('#settings').submit(function (event) {
 function resolveComplete(playerWin) {
     if (playerWin = true) {
         addWin(true)
-        alert("Player Win! Your win count has been updated.\n Click confirm to start new game")
+        alert("Player Win!\n Your win count has been updated.\n Click OK to start new game")
         location.reload();
     }
     else {
         addWin(false)
-        alert("NPC Win! Your loss count has been updated.\n Click confirm to start new game")
+        alert("NPC Win!\n Your loss count has been updated.\n Click OK to start new game")
         location.reload();
     }
 }
@@ -44,7 +45,7 @@ function addWin(isUserWin) {
 
     dataToSend["userWin"] = isUserWin;
  
-    console.log(dataToSend)
+    //console.log(dataToSend)
     $.post('/game/win', dataToSend);
 }
 
@@ -86,16 +87,10 @@ function boardOnClick() {
     }
 
 }
-function getRandomInt(min, max) {
-    if (min < 0) {
-        min=0
-    }
-    if (max >= vBoard.length) {
-        max = vBoard.length-1
-    }
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
+
+
+//NPC make easy difficulty move
 function npc_easy_move() {
     while (true) {
         let row = getRandomInt(0, vBoard.length - 1)
@@ -116,13 +111,14 @@ function npc_easy_move() {
             vBoard[row][col] = npcColor;
             return id
         }
-        else {
-            console.log("position occupied, randomizing new id")
-        }
+        //else {
+        //    console.log("position occupied, randomizing new id")
+        //}
 
     }
 }
 
+//NPC make medium difficulty move
 function npc_medium_move() {
     let user_move_row = parseInt(userMoveID[0])
     let user_move_col = parseInt(userMoveID[1])
@@ -155,6 +151,7 @@ function npc_medium_move() {
     return id
 }
 
+//Check difficulty settings for npc move
 function npcMove() {
     var moveID
     if (difficulty == "Easy") {
@@ -170,6 +167,7 @@ function npcMove() {
 
 }
 
+//check if move is valid
 function validMove(row,col) {
     if (vBoard[row][col] == ' ') {
         return true
@@ -179,6 +177,7 @@ function validMove(row,col) {
     }
 }
 
+//dynamic generate board
 function generateTable(board) {
     //fill board table
     for (let row = 0; row <= 8; row++) {
@@ -217,25 +216,27 @@ function checkWin(targetID) {
     var color = vBoard[row][col]
 
     if (checkTop(color, row, col) + checkBottom(color, row, col) >= 6) {
-        console.log("1")
+        //console.log("1")
         return true
     }
     else if (checkLeft(color, row, col) + checkRight(color, row, col) >= 6) {
-        console.log("2")
+        //console.log("2")
         return true
     }
     else if (checkTopRight(color, row, col) + checkBottomLeft(color, row, col) >= 6) {
-        console.log("3")
+        //console.log("3")
         return true
     }
     else if (checkTopLeft(color, row, col) + checkBottomRight(color, row, col) >= 6) {
-        console.log("4")
+        //console.log("4")
         return true
     }
     else {
         return false
     }
 } 
+
+//Win condition checking functions
 
 function checkTop(color, row, col) {
     let count = 0
@@ -317,7 +318,6 @@ function checkBottomLeft(color, row, col) {
         //console.log("checking " + row + col)
         //getCell('' + row + col).css("background-color", "red")
         if (vBoard[row][col] == color) {
-
             count += 1;
         }
         row += 1;
@@ -360,16 +360,14 @@ function checkBottomRight(color, row, col) {
 }
 
 
-
-
 //helper function
 
-//return cell by its position
+//Return cell by its position
 function getCell(id) {
     return $("[id=" + id + "]")
 }
 
-//return chess piece image
+//Return chess piece image
 function img_blackPiece() {
     let img = '<img src="images/black.png" style="width:40px;height:auto;text-align:center;">';
     return img;
@@ -378,4 +376,15 @@ function img_blackPiece() {
 function img_whitePiece() {
     let img = '<img src="images/white.png" style="width:40px;height:auto;text-align:center;">';
     return img;
+}
+
+//Return random int given range
+function getRandomInt(min, max) {
+    if (min < 0) {
+        min = 0
+    }
+    if (max >= vBoard.length) {
+        max = vBoard.length - 1
+    }
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

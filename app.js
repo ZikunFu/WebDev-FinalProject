@@ -1,91 +1,60 @@
 'use strict';
+//Dependency
 const express = require('express');
 const mongoose = require('mongoose');
-
+//Database Info
 const Info = require('./models/test.js');
-//database methods
-//const database = require('./serverJS/database.js');
-//login methods
-const bcrypt = require('bcryptjs');
-const { response } = require('express');
-
-let app = express();
-
+//MongoDB connect
 const dbURI = 'mongodb+srv://user1:user11234@profile.p9muv.mongodb.net/profile-info?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
-    .then((result) => console.log('Connected to Database!'))
+    .then((result) => console.log('MongoDB Connected.'))
     .catch((err) => console.log(err));
-
+//Express app setup
+let app = express();
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
+// view engine setup
+app.set('views', __dirname + '/views');
+app.set('view engine', 'pug');
 
+//Current user session variables
 var userdata = {};
 var authorized = false;
 
-// add new info
+//Helper functions
 
-//app.get('/add-info', (req,res)=>{
-//    const info = new Info({
-//        username: 'mikeJ',
-//        password: 'MiK000111',
-//        win: 6,
-//        loss: 3
-//    });
-
-//    info.save()
-//        .then((result)=>{
-//            res.send(result)
-//        })
-//        .catch((err)=>{
-//            console.log(err);
-//        });
-//});
-
-//get all the data info
-app.get('/all-infos',(req,res)=>{
-    Info.Info.find()
-        .then((result)=>{
-            res.send(result);
-        })
-        .catch((err)=>{
-            console.log(err);
-        });
-})
-
-// view engine setup
-app.set('views', __dirname+'/views');
-app.set('view engine', 'pug');
-
+//Check if user exists in database
 function userExists(userToFind) {
-    return new Promise ((resolve, reject) =>{
-        Info.Info.find({username: userToFind}).then(
+    return new Promise((resolve, reject) => {
+        Info.Info.find({ username: userToFind }).then(
             function (results) {
                 if (results.length > 0) {
                     userdata["username"] = results[0].username
-                    console.log(results[0].username+" found in database");
-                    resolve (results[0].password);
-                }else{
-                    console.log("username not found")
-                    reject ("");
+                    //console.log(results[0].username + " found in database");
+                    resolve(results[0].password);
+                } else {
+                    //console.log("username not found")
+                    reject("");
                 }
             }
         );
-    }); 
+    });
 };
-// make win and loss work and record in the database
+
+//Update database with end game results
 function updateGame(usertoFind, isWin){
-    console.log("finding user");
+    //console.log("finding user");
     Info.Info.find({username: usertoFind}).then(
         function(results){
             if(isWin){
                 let count = results[0].win;
                 count = count + 1;
-                console.log(results[0].win)
+                //console.log(results[0].win)
                 var query = {username: usertoFind};
                 var newValues = { $set: {win: count}};
                 Info.Info.updateOne(query, newValues, function(err, res){
                     if (err) throw err;
-                    console.log('win + 1')
+                    //console.log('User data: win + 1')
                 })}
                 else{
                     let count = results[0].loss;
@@ -95,12 +64,13 @@ function updateGame(usertoFind, isWin){
                     var newValues = {$set: {loss: count}};
                     Info.Info.updateOne(query, newValues, function(err, res){
                         if(err) throw err;
-                        console.log('win - 1')
+                        //console.log('User data: loss + 1')
                     })
             }
         })
 }
 
+//calculate Statistics for Profile page
 function calculateRank() {
     var wins = userdata[0].win;
     var loss = userdata[0].loss;
@@ -141,6 +111,7 @@ function calculateRank() {
     return rank
 }
 
+//Update user password in database
 function updatePassword(usertoFind, currPassword, newPassword, response) {
 
     Info.Info.find({ username: usertoFind }).then(
@@ -177,6 +148,7 @@ function updatePassword(usertoFind, currPassword, newPassword, response) {
         })
 }
 
+//update userdata variable with current user info
 function getUserData(usertoFind) {
     Info.Info.find({ username: usertoFind }).then(
         function (results) {
@@ -185,6 +157,20 @@ function getUserData(usertoFind) {
     )
 }
 
+//View Render
+
+//Show database content (DEBUG only)
+app.get('/all-infos', (req, res) => {
+    Info.Info.find()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+})
+
+//render home page
 app.get('/', function (request, response) {
     
     response.render("home"
@@ -196,7 +182,7 @@ app.get('/', function (request, response) {
 });
 
 
-
+//render game page
 app.get('/game', function (request, response) {
     if (Object.keys(userdata).length > 0) {
         response.render("game"
@@ -215,6 +201,7 @@ app.get('/game', function (request, response) {
     }
 });
 
+//Post game result handle
 app.post('/game/win', (req, res) => {
     // you have address available in req.body:
     console.log("Game win Request received: " + req.body.username + " with " + req.body.userWin);
@@ -223,12 +210,14 @@ app.post('/game/win', (req, res) => {
     res.json({ ok: true });
 });
 
+//render Register page
 app.get('/register', function (req, response) {
     response.render("register",{
         title: "register page"
     });
 });
 
+//Register account handle
 app.post('/register', function(request, res){
     let username = request.body.username;
     let password = request.body.password;
@@ -262,7 +251,7 @@ app.post('/register', function(request, res){
     })
 });
 
-//login direct
+//render login page
 app.get('/login', function(req, res){
     res.render('login',{
         title: "",
@@ -270,21 +259,8 @@ app.get('/login', function(req, res){
     });
 });
 
-//logout direct
-app.get('/logout', function (request, response) {
-    userdata = {};
-    authorized = false;
-    response.render("home"
-        , {
-            title: "Player!!!",
-            data: JSON.stringify(userdata),
-            auth: authorized
-        }
-    );
-});
-
-
-app.post('/login', function(request, res){
+//login handle
+app.post('/login', function (request, res) {
     //Check the login info form database.
     console.log(request.body);
     let inputUsername = request.body.username;
@@ -302,23 +278,39 @@ app.post('/login', function(request, res){
                 title: "Login page",
                 errorMessage: "Login successful!!"
             });
-        }else{
-            res.render('login',{
+        } else {
+            res.render('login', {
                 title: "Login page",
                 errorMessage: "Login failed please try agian!!"
             });
         }
-       
+
     }).catch(error => {
-        res.render('login',{
+        res.render('login', {
             title: "Login page",
             errorMessage: "Login failed please try again!!"
         });
-    }); 
+    });
 });
 
+//logout curr user
+app.get('/logout', function (request, response) {
+    userdata = {};
+    authorized = false;
+    response.render("home"
+        , {
+            title: "Player!!!",
+            data: JSON.stringify(userdata),
+            auth: authorized
+        }
+    );
+});
+
+//render profile page
 app.get('/profile', function (request, response) {
     if (Object.keys(userdata).length > 0) {
+        //update userdata to account for newly addition
+        getUserData(userdata[0].username)
         var rank = calculateRank();
         var currRank = rank[0];
         var nextRank = rank[1];
@@ -344,15 +336,16 @@ app.get('/profile', function (request, response) {
     }
 });
 
-//profile password update
+//profile password update handle
 app.post('/profile', function (request, res) {
     let currPassword = request.body.currPassword;
     let newPassword = request.body.newPassword;
-    console.log("update password curr=" + currPassword + " new=" + newPassword);
+    //console.log("Password Change called: currPW=" + currPassword + " newPW=" + newPassword);
     updatePassword(userdata[0].username, currPassword, newPassword,res);
     
 });
 
+//render guide page
 app.get('/guide', function (request, response) {
     response.render("guide"
         , {
@@ -362,6 +355,7 @@ app.get('/guide', function (request, response) {
     );
 });
 
+//render rank page
 app.get('/rank', function (request, response) {
     Info.Info.find()
         .then((result) => {
@@ -374,7 +368,7 @@ app.get('/rank', function (request, response) {
                 userArr.push(userData)
 
             }
-            userArr.sort((a, b) => { return a.point - b.point });
+            userArr.sort((a, b) => { return b.point - a.point});
             response.render("rank"
                 , {
                     data: JSON.stringify(userArr),
@@ -393,9 +387,10 @@ app.get('/rank', function (request, response) {
     
 });
 
-
+//port setup
 app.set('port', process.env.PORT || 3000);
 
+//starting server
 app.listen(app.get('port'), function () {
-    console.log(`Listening on port ${app.get('port')}`);
+    console.log(`Server Started (localhost:${app.get('port')})`);
 });

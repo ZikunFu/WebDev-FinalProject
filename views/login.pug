@@ -1,6 +1,5 @@
 extends navBar
 append styles
-
         link(rel="stylesheet", href="https://www.w3schools.com/w3css/4/w3.css")
         link(rel="stylesheet", href="https://www.w3schools.com/lib/w3-theme-black.css")
         link(href='styles/login.css', rel='stylesheet')
@@ -10,16 +9,16 @@ block content
             div(class="w3-center")
                 //h4 BEAUTIFUL RESPONSIVE WEB SITES
                 br
-                h1(class="w3-xxxlarge w3-animate-bottom") Log In
+                h1(class="w3-xxxlarge w3-animate-bottom") LOG IN
                 div(class="error")= errorMessage
         form(method="post", action="/login", class="w3-padding-32")
-            label(class="label", for="username") Username:
+            //label(class="label", for="username") Username
             input(type="text",
                 id="username",
                 name="username",
                 placeholder="username",
                 class="control-row1")
-            label(class="label", for="password") Password: 
+            //label(class="label", for="password") Password
             input(type="password",
                 id="password",
                 name="password",
@@ -28,7 +27,4 @@ block content
             br
             br
             br
-            button(class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey", onclick="document.getElementById('id01').style.display='block'", style="font-weight:900;") Login
-
-
-	
+            button(class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey", style="font-weight:900;") GO

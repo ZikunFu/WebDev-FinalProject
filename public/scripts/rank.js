@@ -9,7 +9,7 @@
 	//create chart
     const margin = {top: 30, right: 30, bottom: 70, left: 60};
 	const width = 500 - margin.left - margin.right;
-	const height = 500 - margin.top - margin.bottom;
+	const height = 400 - margin.top - margin.bottom;
 			
 	const svg = d3.select("#chart")
 	  .append("svg")

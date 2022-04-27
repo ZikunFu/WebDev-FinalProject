@@ -1,28 +1,39 @@
-#logo{
+#logo {
     margin-left: -5px;
     margin-top: -15px;
     width: 50px;
     height: auto;
 }
-.label{
+
+.label {
     width: 320px;
-	padding: 30px;
-	padding-top: 156px;
+    padding: 30px;
+    padding-top: 156px;
+    margin-right: 20px;
     font-size: 40px;
 }
-.control-row1{
-	position: relative;
+
+.control-row1 {
+    margin-left: 20px;
+    position: relative;
+    width: 180px;
 }
-.control-row2{
-	position: relative;
+
+.control-row2 {
+    width: 180px;
+    margin-left: 20px;
+    position: relative;
 }
-h1{
-    color:aliceblue;
+
+h1 {
+    color: aliceblue;
     text-align: center
 }
-form{
+
+form {
     text-align: center
 }
-.error{
-    font-size:medium;
+
+.error {
+    font-size: medium;
 }
