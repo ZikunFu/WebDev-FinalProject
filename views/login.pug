@@ -2,7 +2,7 @@ extends navBar
 append styles
     link(href = 'styles/login.css', rel = 'stylesheet')
 block content
-    h1= title
+    h1= "Login"
 
     div(class="error")= errorMessage
 	
@@ -12,11 +12,11 @@ block content
             id="username",
             name="username",
             placeholder="username",
-            class="control row1")
+            class="control-row1")
         label(class="label", for="password") Password: 
         input(type="password",
             id="password",
             name="password",
             placeholder="password",
-            class="control row2")
+            class="control-row2")
         button(class="control row3") Log In

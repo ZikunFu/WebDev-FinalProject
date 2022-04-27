@@ -266,7 +266,7 @@ app.post('/register', function(request, res){
 //login direct
 app.get('/login', function(req, res){
     res.render('login',{
-        title: "Login page",
+        title: "",
         auth: authorized
     });
 });
@@ -277,7 +277,7 @@ app.get('/logout', function (request, response) {
     authorized = false;
     response.render("home"
         , {
-            title: "Chen Yang NB",
+            title: "Player!!!",
             data: JSON.stringify(userdata),
             auth: authorized
         }
