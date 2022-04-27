@@ -1,0 +1,20 @@
+#rank {
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+#rank th {
+    height: 50px;
+    text-align: center;
+    border-bottom:1px solid #000000;
+}
+
+#rank td {
+    width: 100px;
+    height: 40px;
+    text-align: center;
+}
+
+#chart{
+    text-align: center;
+}
