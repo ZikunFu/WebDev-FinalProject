@@ -362,48 +362,33 @@ app.get('/guide', function (request, response) {
     );
 });
 
-function findAllMembersCursor() {
-    return Info.Info.find().cursor();
-}
-
-let users = [];
-
-async function test() {
-    //read information of database, and store them into an new array
-    let temp = [];
-
-    const membersCursor = await findAllMembersCursor();
-    let N = 0;
-    await membersCursor.eachAsync(member => {
-        N++;
-        let result = member.win - member.loss;
-        console.log(`name of the ${N}th member: ${member.username} and ${result}`);
-        let obj = {};
-        obj.name = member.username;
-        obj.point = result;
-        temp.push(obj);
-    });
-    console.log(`loop all ${N} members success`);
-
-    temp.sort((a,b)=>{return a.point-b.point});
-
-    users = temp;
-
-    return users;
-}
-
 app.get('/rank', function (request, response) {
-    test();
-    console.log(users);
-    //users = [{"name": "nice", "point": "12"}];
-    //let users = test();
-    //console.log(users);
-    response.render("rank"
-        , {
-            data: JSON.stringify(users),
-            auth: authorized
-        }
-    );
+    Info.Info.find()
+        .then((result) => {
+            var userArr = [];
+            //parse user data
+            for (const user of result) {
+                var userData = {};
+                userData.name = user.username
+                userData.point = user.win
+                userArr.push(userData)
+            }
+            response.render("rank"
+                , {
+                    data: JSON.stringify(userArr),
+                    auth: authorized
+                }
+            );
+        })
+        .catch((err) => {
+            console.log(err);
+            response.render("error"
+                , {
+                    message: "Ranking data not found"
+                }
+            );
+        });
+    
 });
 
 
@@ -411,7 +396,11 @@ app.get('/rank', function (request, response) {
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
-    //next(err);
+    response.render("error"
+        , {
+            message: "404 Page Not Found"
+        }
+    );
 });
 
 
