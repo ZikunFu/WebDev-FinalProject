@@ -2,6 +2,7 @@ extends navBar
 append styles
 	// Custom styles for this template
 	link(href='styles/home.css', rel='stylesheet')
+	link(href='styles/rank.css', rel='stylesheet')
 	
 append scripts
 	script(src="scripts/rank.js")
@@ -10,4 +11,8 @@ append scripts
 		user = !{data}
 
 block content
-	div(id="asdf")
+	table(id="rank")
+		tr 
+			th user 
+			th point 
+	div(id="chart")
