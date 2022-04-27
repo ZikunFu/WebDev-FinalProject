@@ -189,7 +189,6 @@ app.get('/', function (request, response) {
     
     response.render("home"
     ,{
-        title: "Player!",
         data: JSON.stringify(userdata),
         auth: authorized
      }
@@ -357,7 +356,7 @@ app.post('/profile', function (request, res) {
 app.get('/guide', function (request, response) {
     response.render("guide"
         , {
-            data:null
+            data: JSON.stringify(userdata)
         }
     );
 });

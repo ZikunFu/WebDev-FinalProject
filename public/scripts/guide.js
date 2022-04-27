@@ -9,7 +9,7 @@ $(document).ready(function () {
 //Button for beginner
 $('#op1').click(function (event) {
     event.preventDefault();
-    let query = "Chinese Go chess beginner guide";
+    let query = "Gomoku beginner guide";
     $('#keyword').val(query)
     search(query);
 });
@@ -17,7 +17,7 @@ $('#op1').click(function (event) {
 //Button for intermediate
 $('#op2').click(function (event) {
     event.preventDefault();
-    let query = "Chinese Go chess intermediate guide";
+    let query = "Gomoku strategy";
     $('#keyword').val(query)
     search(query);
 });
@@ -25,7 +25,7 @@ $('#op2').click(function (event) {
 //button for expert
 $('#op3').click(function (event) {
     event.preventDefault();
-    let query = "Chinese Go chess expert guide";
+    let query = "Gomoku expert";
     $('#keyword').val(query)
     search(query);
 });

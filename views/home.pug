@@ -1,12 +1,55 @@
 extends navBar
 append styles
 	// Custom styles for this template
+	//free template code retreived from www.w3schools.com
+	link(rel="stylesheet", href="https://www.w3schools.com/w3css/4/w3.css")
+	link(rel="stylesheet", href="https://www.w3schools.com/lib/w3-theme-black.css")
 	link(href='styles/home.css', rel='stylesheet')
+
 block content
-	div.home
-		h1 welcome! #{title}
-		div.bt
-			a(href="/game")
+
+	header(id="myHeader" class="w3-container w3-theme w3-padding")
+		div(class="w3-center")
+			//h4 BEAUTIFUL RESPONSIVE WEB SITES
+			br
+			h1(class="w3-xxxlarge w3-animate-bottom") Gomoku Game
+			div(class="w3-padding-32")
+				a(href="/game")
+					button(class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey", onclick="document.getElementById('id01').style.display='block'", style="font-weight:900;") PLAY
+	div(class="w3-row-padding w3-center w3-margin-top")
+		div(class="w3-third")
+			div(class="w3-card w3-container", style="min-height:300px;color:white;")
+				h3 Profile
+				br
+				a(href="/profile")
+					i(class="fa-solid fa-id-card w3-margin-bottom", style="font-size:120px")
+				p User Info
+				p Password Change
+
+		div(class="w3-third")
+			div(class="w3-card w3-container", style="min-height:300px;color:white;")
+				h3 Guide
+				br
+				a(href="/guide")
+					i(class="fa-solid fa-book w3-margin-bottom", style="font-size:120px")
+				p YouTube API
+				p Search For Video Guides
+
+		div(class="w3-third")
+			div(class="w3-card w3-container", style="min-height:300px;color:white;")
+				h3 Ranking
+				br
+				a(href="/rank")
+					i(class="fa-solid fa-ranking-star w3-margin-bottom", style="font-size:120px")
+				p Score Table
+				p Raising Star D3
+				
+
+
+	//div.home
+		//h1 Gomoku Game
+		//div.bt
+			//a(href="/game")
 				button(type="button") PLAY
 		div.bt
 			a(href="/guide")

@@ -2,12 +2,35 @@
 .relative {
     /* padding: 10px; */
     position: relative;
-    background-color: #fff;
+    background-color: #000000;
     margin: 9px;
-text-align: center;}
-#options{
-    text-align:center;
+    text-align: center;
+    color:white;
 }
+
+.navitem {
+    display: inline-block;
+    width: 160px;
+    height: 40px;
+    text-align: center;
+    border: black;
+    background-color: #616161;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-right: 12px;
+}
+    .navitem:hover {
+        box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        color: black;
+        background-color: white;
+    }
+#options {
+    text-align: center; 
+}
+
 input[type=text] {
     width: 20%;
     height: 16%;
@@ -18,6 +41,9 @@ input[type=text] {
     -webkit-transition: 0.5s;
     transition: 0.5s;
     outline: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: black;
 }
 
     input[type=text]:focus {
@@ -25,6 +51,7 @@ input[type=text] {
     }
 
 input[type=submit] {
+    background-color:#616161;
     width: 20%;
     height: 16%;
     padding: 12px 20px;
@@ -34,19 +61,15 @@ input[type=submit] {
     -webkit-transition: 0.5s;
     transition: 0.5s;
     outline: none;
-margin-left: 5px;}
+    margin-left: 5px;
+    
+}
+    input[type=submit]:hover {
+        box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        color:black;
+        background-color:white;
+    }
 
-.navitem {
-    display: inline-block;
-    width: 160px;
-    height: 40px;
-    text-align: center;
-    border: gray;
-    background-color: #E8562A;
-    color: #fff;
-    cursor: pointer;
-    font-weight: bold;
-font-size: 20px;margin-right: 12px;}
 
 /*video division starts here*/
 #videos {
@@ -64,6 +87,7 @@ font-size: 20px;margin-right: 12px;}
     margin: 0 2%;
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
     line-height: 0;
+    color:white;
 }
 
 #thumbnail {

@@ -9,6 +9,7 @@ html(lang="en")
 		title= title
 		block styles
 			link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
+			link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css")
 			link(href='styles/navBar.css', rel='stylesheet')
 	body(data-spy="scroll",data-target=".scrollspy")
 		block body
@@ -22,8 +23,9 @@ html(lang="en")
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					a.navbar-brand(href='#')
-						img(src='images/wuziqi.png' width="30" height="24" id="logo")
+					a.navbar-brand(href='/')
+						i(class="fa-solid fa-2xl fa-chess-board" style="width:120px;color:white;")
+						//img(src='images/wuziqi.png' width="30" height="24" id="logo")
 				#navbar.navbar-collapse.collapse
 					ul.nav.navbar-nav
 						li

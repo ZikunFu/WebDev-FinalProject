@@ -54,9 +54,13 @@
     <Content Include="public\styles\error.css">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="public\styles\login.css" />
+    <Content Include="public\styles\navBar.css" />
     <Content Include="public\styles\profile.css">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="public\styles\rank.css" />
+    <Content Include="public\styles\register.css" />
     <Content Include="README.md" />
     <Content Include="views\error.pug" />
     <Content Include="views\rank.pug" />

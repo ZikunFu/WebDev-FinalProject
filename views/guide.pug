@@ -12,11 +12,11 @@ append scripts
 	script(src="scripts/guide.js")
 block content
 	div(class="relative")
-		p Select Your Level
+		h1 Choose Your Level
 		button(class="navitem" id="op1") Beginner
 		button(class="navitem" id="op2") Intermediate
 		button(class="navitem" id="op3") Expert
-	form(id="options")
-		input(type="text" id="keyword" placeholder="Video Title" required)
-		input(type="submit" value="Search")
+		form(id="options")
+			input(type="text" id="keyword" placeholder="Video Title" required)
+			input(type="submit" value="Search")
 	div(id="videos" class="container")

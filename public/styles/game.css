@@ -2,6 +2,8 @@
     width: 50%;
     text-align: center;
     font-family: 'Century Schoolbook';
+    background-color: #616161;
+    color:white;
 }
 
 #game {
@@ -39,6 +41,7 @@ table.board {
     border-collapse: collapse;
     font-size: 30px;
     margin: 0px auto;
+    cursor: none;
 }
 button{
     margin-top:0;
@@ -59,7 +62,7 @@ th, td {
 
 
 table.board td:hover {
-    background-color: #f5dd90;
+    background-color: rgba(245,221,144,0.5);
 }
 
 
@@ -75,7 +78,7 @@ select {
     background-color: peru;
     color: cornsilk;
     padding: 10px;
-    width: 120px;
+    width: 100px;
     border: none;
     font-size: 20px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
@@ -83,7 +86,11 @@ select {
     appearance: button;
     outline: none;
 }
-    
+    select:hover {
+        box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        color: black;
+        background-color: white;
+    }
 
 button {
     background-color: peru;
@@ -96,4 +103,10 @@ button {
     font-size: 24px;
     margin: 4px 2px;
     cursor: pointer;
+
 }
+    button:hover {
+        box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        color: black;
+        background-color: white;
+    }

@@ -10,6 +10,7 @@
 .bt{
     text-align: center;
 }
+
 button{
     /* margin-top: 50px; */
     text-align: center;
@@ -19,4 +20,10 @@ button{
 }
 h1{
     text-align: center;
+}
+h3{
+    color:white;
+}
+a:hover{
+    color:yellow;
 }

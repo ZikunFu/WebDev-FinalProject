@@ -18,7 +18,7 @@ $('#settings').submit(function (event) {
     console.log("playercolor is set to " + playerColor);
     console.log("npcColor is set to " + npcColor);
     console.log("difficulty is set to" + difficulty);
-    
+    alert("Settings Applied.\nYour color: " + playerColor + "\nNPC color: " + npcColor+"\nAI: " + difficulty)
 });
 
 //essential functions
