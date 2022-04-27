@@ -356,7 +356,7 @@ app.post('/profile', function (request, res) {
 app.get('/guide', function (request, response) {
     response.render("guide"
         , {
-            data: JSON.stringify(userdata)
+            data: userdata[0]
         }
     );
 });
@@ -399,7 +399,7 @@ app.get('/rank', function (request, response) {
     //console.log(users);
     response.render("rank"
         , {
-            data: JSON.stringify(users),
+            data:JSON.stringify(users)
         }
     );
 });

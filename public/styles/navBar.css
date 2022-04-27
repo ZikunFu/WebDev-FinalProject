@@ -64,8 +64,17 @@ html, body {
         color: black;
         background-color: white;
     }
-#right3{
+
+#right3 {
+    color: lightgray;
+    background-color: unset;
+    border-right: 1px solid white;
+    border-left: 1px solid white;
 }
+    #right3:hover {
+        color: black;
+        background-color: white;
+    }
 body {
     background-color: #131516;
 }
