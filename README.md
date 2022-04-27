@@ -27,7 +27,7 @@ localhost:$port/all-infos
 
 ### Dependencies
 
-* Windows 10
+* Node.js
 * Express
 * Mongoose
 
