@@ -13,6 +13,9 @@ note: Chen Yang participates with "ChenYang-OTU" and commits and pushes code as 
 
 GoMoKu Game is a strategy board game. It is played on Go pieces (black and white) on the Go board. The victory condition are defined by "if 5 go pieces are in the sae row/ column/diagonal". In this final project we made, we achieved all the conditions that a game should have including rank, profile, changing and saving password, login, register, and guide linked to youtube videos with api.
 
+## Presentation
+* see the following link https://github.com/ZikunFu/WebDev-FinalProject/blob/master/Independent_Study_Presentation.pdf
+
 ## Getting Started
 
 note: we don't allow users to modify the database since it is an online game, however, you can use the function in app.js
